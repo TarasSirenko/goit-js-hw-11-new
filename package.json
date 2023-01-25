@@ -1,0 +1,34 @@
+{
+  "name": "parcel-project-template",
+  "version": "2.0.0",
+  "description": "",
+  "homepage": "https://tarassirenko.github.io/goit-js-hw-10-new/",
+  "scripts": {
+    "start": "parcel src/index.html --open",
+    "build": "parcel build src/*.html --public-url /goit-js-hw-10-new/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TarasSirenko/goit-js-hw-10-new.git"
+  },
+  "keywords": [],
+  "author": "Alexander Repeta <alexander.repeta@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/goitacademy/parcel-project-template/issues"
+  },
+  "dependencies": {
+    "lodash.debounce": "^4.0.8",
+    "lodash.throttle": "^4.1.1",
+    "modern-normalize": "^1.1.0"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.6.0",
+    "axios": "^1.2.4",
+    "notiflix": "^3.2.6",
+    "parcel-bundler": "^1.11.0",
+    "parcel-plugin-handlebars-precompile": "^1.0.2",
+    "simplelightbox": "^2.12.1"
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead"
+}
