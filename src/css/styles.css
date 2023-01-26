@@ -1,5 +1,34 @@
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
+}
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: #212121;
+}
+
+button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    /* отображаем курсор в виде руки при наведении; некоторые
+  считают, что необходимо оставлять стрелочный вид для кнопок */
+    cursor: pointer;
+}
+
+main {
+   
+    /* max-width: 1600px; */
+    margin: 0 auto;
+    
 }
 .visually-hidden {
     position: absolute;
@@ -24,12 +53,49 @@ body {
     color: #212121;
     line-height: 1.5;
 }
-.search-form {
+
+.navigation {
+    max-width: 600px;
     display: flex;
-    justify-content: center;
-    background-color: rgb(152, 152, 255);
-    padding: 10px;
+    margin: 0 auto;
 }
+.navigation-btn {
+
+    width: 200px;
+    padding: 10px 0px;
+
+}
+.form-wrapper {
+
+
+    background-color: rgb(152, 152, 255);
+    padding: 80px;
+    background-image: url(../../img/base-bk.jpg);
+    opacity: 0.8;
+}
+
+.search-form {
+    margin: 0 auto;
+    padding: 15px;
+    max-width: 450px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    display: flex;
+        display: flex;
+            justify-content: center;
+}
+.form-input {
+    min-width: 300px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+.submit-btn {
+    font-size: 25px;
+    color: white;
+}
+
 .gallery {
     padding: 20px;
     display: flex;
@@ -38,19 +104,32 @@ body {
     justify-content: space-around;
 }
 .info {
+    background-color:rgb(224, 224, 224);
+   font-size: 10px;
     display: flex;
     justify-content: space-around;
 }
 .photo-card {
-    /* max-width: 400px; */
-    border: 2px solid black;
-    border-radius: 2px;
+    height: 300px;
+    max-width: 400px;
+    /* border: 2px solid rgb(126, 126, 126); */
+    border-radius: 5px; 
     margin-bottom: 20px;
+    overflow: hidden
 }
 
-.gallary-container {
+
+.photo-card img {
+    width: 400px; 
+    height: 270px;
+    object-fit: cover;
+}
+
+.gallery-container {
+    /* background-color: rgba(100, 100, 100, 0.2);
+        min-height: 100vh; */
     margin: 0 auto;
-    max-width: 2050px;
+    max-width: 1280px;
     padding-bottom: 20px;
 }
 
