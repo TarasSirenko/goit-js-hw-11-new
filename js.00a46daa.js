@@ -172,7 +172,7 @@ module.exports = reloadCSS;
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/simplelightbox/dist/simple-lightbox.min.css":[function(require,module,exports) {
+},{"./..\\..\\img\\base-bk.jpg":[["base-bk.1fd260e4.jpg","../img/base-bk.jpg"],"../img/base-bk.jpg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/simplelightbox/dist/simple-lightbox.min.css":[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
@@ -4386,7 +4386,7 @@ const templateFunction = _handlebars.default.template({
         }
         return undefined;
       };
-    return "<a class=\"card-link\" href=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "largeImageURL") : depth0, depth0)) + "\">\r\n    <div class=\"photo-card\">\r\n    <img src=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "webformatURL") : depth0, depth0)) + "\" alt=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "\" loading=\"lazy\" />\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>Likes: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b>Views: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b>Comments: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b>Downloads: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n        </p>\r\n    </div>\r\n</div>\r\n</a>\r\n";
+    return "<a class=\"card-link\" href=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "largeImageURL") : depth0, depth0)) + "\">\r\n    <div class=\"photo-card\">\r\n<img src=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "webformatURL") : depth0, depth0)) + "\" alt=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "\" loading=\"lazy\" />\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>Likes: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b>Views: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b>Comments: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b>Downloads: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n        </p>\r\n    </div>\r\n</div>\r\n</a>\r\n";
   },
   "compiler": [8, ">= 4.3.0"],
   "main": function (container, depth0, helpers, partials, data) {
@@ -4809,7 +4809,10 @@ var _notiflixReportAio = require("notiflix/build/notiflix-report-aio");
 var _simplelightbox = _interopRequireDefault(require("simplelightbox"));
 var _imgCardMarcup = _interopRequireDefault(require("../hbs/imgCardMarcup.hbs"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+const lightboxGallery = new _simplelightbox.default('.gallery a');
 const debounce = require('lodash.debounce');
+const BASE_URL = 'https://pixabay.com/api/';
+const DEBOUNCE_DELAY = 50;
 const Refs = {
   userInput: document.querySelector('[name="searchQuery"]'),
   gallery: document.querySelector('.gallery'),
@@ -4817,12 +4820,14 @@ const Refs = {
   requestForm: document.querySelector('#search-form'),
   loadMoreButton: document.querySelector('.load-more')
 };
-const BASE_URL = 'https://pixabay.com/api/';
-const DEBOUNCE_DELAY = 50;
+
+// auxiliary variables--------------
 let requestUser = '';
-let currentPage = 1;
 let currentRequest = '';
+let currentPage = 1;
 let perPage = 30;
+// ----------------------------
+
 const searchParams = new URLSearchParams({
   key: '33110097-e31e2273406f912ac77c7c325',
   image_type: 'photo',
@@ -4835,15 +4840,19 @@ Refs.userInput.addEventListener('input', debounce(onUserInput, DEBOUNCE_DELAY));
 Refs.submitButton.addEventListener('click', onSubmitBtnClick);
 Refs.loadMoreButton.addEventListener('click', onLoadMoreBtnClick);
 function onSubmitBtnClick() {
-  if (requestUser === currentRequest) return;
+  if (requestUser === currentRequest && !(requestUser === '')) return;
   if (requestUser === '') {
     clearPage();
+    _notiflixNotifyAio.Notify.warning('Enter a search term please.');
     currentRequest = requestUser;
     return;
   }
   currentPage = 1;
   clearPage();
-  fechImages();
+  fechImages().then(searchResultMessage);
+}
+function searchResultMessage(obj) {
+  _notiflixNotifyAio.Notify.info(`Hooray! We found ${obj.totalHits} images.`);
 }
 function clearPage() {
   Refs.gallery.innerHTML = '';
@@ -4851,8 +4860,8 @@ function clearPage() {
 }
 function fechImages() {
   return fetch(`${BASE_URL}?q=${requestUser}&page=${currentPage}&${searchParams}`).then(response => response.json()).then(obj => {
-    obj.hits.length === 0 ? onIncorectRequest() : onCorectRequest(obj);
-    return obj.total;
+    obj.hits.length === 0 ? onIncorectRequest().then() : onCorectRequest(obj);
+    return obj;
   });
 }
 function onUserInput(event) {
@@ -4868,18 +4877,29 @@ function onIncorectRequest() {
 }
 function onCorectRequest(obj) {
   renderCards(obj);
-  console.log(obj);
   Refs.loadMoreButton.classList.remove('visually-hidden');
-  if (perPage * currentPage > obj.totalHits) {
-    Refs.loadMoreButton.classList.add('visually-hidden');
-    _notiflixNotifyAio.Notify.info('We`re sorry, but you`ve reached the end of search results.');
-  }
+  if (perPage * currentPage > obj.totalHits) whenQueryResultsEnd();
+  lightboxGallery.refresh();
   currentRequest = requestUser;
-  var lightbox = new _simplelightbox.default('.gallery a');
+  if (currentPage > 1) {
+    setTimeout(() => {
+      window.scrollBy({
+        top: window.innerHeight - 80,
+        behavior: 'smooth'
+      });
+    }, 250);
+  }
+}
+function whenQueryResultsEnd() {
+  Refs.loadMoreButton.classList.add('visually-hidden');
+  _notiflixNotifyAio.Notify.info('We`re sorry, but you`ve reached the end of search results.');
 }
 function renderCards(obj) {
   Refs.gallery.insertAdjacentHTML('beforeend', (0, _imgCardMarcup.default)(obj.hits));
 }
+
+//
+//   Refs.gallery.firstElementChild.getBoundingClientRect();
 },{"../css/styles.css":"css/styles.css","simplelightbox/dist/simple-lightbox.min.css":"../node_modules/simplelightbox/dist/simple-lightbox.min.css","notiflix/build/notiflix-notify-aio":"../node_modules/notiflix/build/notiflix-notify-aio.js","notiflix/build/notiflix-report-aio":"../node_modules/notiflix/build/notiflix-report-aio.js","simplelightbox":"../node_modules/simplelightbox/dist/simple-lightbox.modules.js","../hbs/imgCardMarcup.hbs":"hbs/imgCardMarcup.hbs","lodash.debounce":"../node_modules/lodash.debounce/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -4905,7 +4925,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1222" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "13173" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
