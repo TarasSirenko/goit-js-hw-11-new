@@ -1,12 +1,19 @@
 import '../css/styles.css';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { Report } from 'notiflix/build/notiflix-report-aio';
+import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 
 import imgCardMarcup from '../hbs/imgCardMarcup.hbs';
 const lightboxGallery = new SimpleLightbox('.gallery a');
+
+Notiflix.Notify.init({
+  warning: {
+    background: '#B3B3B3',
+  },
+  info: {
+    background: '#B3B3B3',
+  },
+});
 
 const debounce = require('lodash.debounce');
 const BASE_URL = 'https://pixabay.com/api/';
@@ -21,11 +28,13 @@ const Refs = {
 };
 
 // auxiliary variables--------------
-let requestUser = '';
+let requestUser = 'black and white';
 let currentRequest = '';
 
 let currentPage = 1;
 let perPage = 30;
+
+const defaultRequest = 'black and white';
 // ----------------------------
 
 const searchParams = new URLSearchParams({
@@ -41,11 +50,13 @@ Refs.userInput.addEventListener('input', debounce(onUserInput, DEBOUNCE_DELAY));
 Refs.submitButton.addEventListener('click', onSubmitBtnClick);
 Refs.loadMoreButton.addEventListener('click', onLoadMoreBtnClick);
 
+fechImages();
+
 function onSubmitBtnClick() {
   if (requestUser === currentRequest && !(requestUser === '')) return;
   if (requestUser === '') {
     clearPage();
-    Notify.warning('Enter a search term please.');
+    Notiflix.Notify.warning('Enter a search term please.');
     currentRequest = requestUser;
     return;
   }
@@ -55,7 +66,9 @@ function onSubmitBtnClick() {
 }
 
 function searchResultMessage(obj) {
-  Notify.info(`Hooray! We found ${obj.totalHits} images.`);
+  Notiflix.Notify.info(`Hooray! We found ${obj.totalHits} images.`, {
+    background: '#808080',
+  });
 }
 
 function clearPage() {
@@ -85,10 +98,8 @@ function onLoadMoreBtnClick() {
 
 function onIncorectRequest() {
   clearPage();
-  Report.failure(
-    '',
-    '"Sorry, there are no images matching your search query. Please try again."',
-    'Okay'
+  Notiflix.Notify.warning(
+    'Sorry, there are no images matching your search query. Please try again.'
   );
 }
 
@@ -111,7 +122,9 @@ function onCorectRequest(obj) {
 
 function whenQueryResultsEnd() {
   Refs.loadMoreButton.classList.add('visually-hidden');
-  Notify.info('We`re sorry, but you`ve reached the end of search results.');
+  Notiflix.Notify.info(
+    'We`re sorry, but you`ve reached the end of search results.'
+  );
 }
 
 function renderCards(obj) {

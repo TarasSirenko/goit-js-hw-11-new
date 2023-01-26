@@ -49,7 +49,7 @@ body {
         Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #fafafa;
+    background-color: rgb(235, 235, 235);
     color: #212121;
     line-height: 1.5;
 }
@@ -69,31 +69,55 @@ body {
 
 
     background-color: rgb(152, 152, 255);
-    padding: 80px;
+    padding:  80px 20px;
     background-image: url(../../img/base-bk.jpg);
+    /* background-size: cover; */
     opacity: 0.8;
 }
 
 .search-form {
     margin: 0 auto;
     padding: 15px;
-    max-width: 450px;
+   /* min-width: 300px; */
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 5px;
-    display: flex;
-        display: flex;
-            justify-content: center;
 }
+
 .form-input {
-    min-width: 300px;
+    font-size: 18px;
+    color: rgb(85, 85, 85);
+    padding: 0 20px;
+    width: 100%;
     height: 40px;
     border: none;
     border-radius: 5px;
-    margin-right: 20px;
+    margin-bottom: 10px;
+
+}
+.form-input::placeholder {
+    font-size: 18px;
 }
 .submit-btn {
+    display: block;
     font-size: 25px;
     color: white;
+    margin: 0 auto;
+}
+
+@media (min-width: 600px) {
+.search-form {
+        display: flex;
+        justify-content: center;
+        max-width: 450px;
+    }
+        .form-input {
+            /* min-width: 300px; */
+    margin-right: 20px;
+    margin-bottom: 0px;
+        }
+   .form-wrapper {
+    padding: 80px;
+   }
 }
 
 .gallery {
@@ -108,6 +132,10 @@ body {
    font-size: 10px;
     display: flex;
     justify-content: space-around;
+}
+
+.info-item {
+color: rgba(0, 0, 0, 0.4);
 }
 .photo-card {
     height: 300px;
