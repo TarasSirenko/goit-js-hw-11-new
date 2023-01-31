@@ -13,6 +13,12 @@ a {
     color: #212121;
 }
 
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 button {
     padding: 0;
     border: none;
@@ -49,17 +55,188 @@ body {
         Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: rgb(235, 235, 235);
-    color: #212121;
-    line-height: 1.5;
+    line-height: 1.5;     
 }
 
-.navigation {
+/* heder ------------------------------------- */
+.logo {
+    width: 80px;
+    height: 40px;
+    background-color: black;
+    margin-right: auto;
+}
+
+.navigation-list {
+    display: flex;
+}
+.navigation-item:not(:last-child) {
+    margin-right: 20px;
+}
+
+.heder-container {
+    display: flex;
+    align-items: center;
+    max-width: 2120px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #bdbdbd;
+}
+
+.options-list {
+    display: flex;
+}
+.options {
+margin-left: 100px;
+}
+.options-item:first-child {
+    margin-right: 10px;
+}
+/* huhdhocod-------------------------------- */
+
+body.light-theme {
+background-color: rgb(235, 235, 235);
+    color: #212121;
+}
+
+body.dark-theme {
+    background-color: #333333;
+    color: #fff;
+}
+
+/* THEME SWITCH */
+
+.theme-switch__icon {
+    color: currentColor;
+    height: 12px;
+    width: 12px;
+    margin-right: 8px;
+    margin-left: 8px;
+    opacity: 0.5;
+}
+
+.switch {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid rgb(121, 120, 120);
+    padding: 3px 0;
+}
+.switch--them {
+    overflow: hidden
+}
+
+.theme-switch__track {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    color: transparent;
+    user-select: none;
+    background-color:#a4a4a4;
+    border-radius: inherit;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.theme-switch__marker {
+    position: relative;
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    /* border-radius: 50%; */
+    z-index: 2;
+    pointer-events: none;
+    /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25); */
+    transform: translateX(-14px);
+    transition: transform 250ms ;
+}
+
+.theme-switch__toggle:checked+.theme-switch__track {
+    background-color: #a4a4a4;
+}
+
+.theme-switch__toggle:checked~.theme-switch__marker {
+    transform: translateX(13px);
+}
+
+/* .theme-switch__toggle:focus+.theme-switch__track,
+.theme-switch__toggle:active+.theme-switch__track {
+    box-shadow: 3px 3px 0 2px #a81212;
+} *
+
+
+/* lenguage----------------------------lenguage-switch */
+
+
+.lenguage-switch__marker {
+    /* position: absolute; */
+width: 26px;
+height: 26px;
+border-radius: 50%;
+pointer-events: none;
+z-index: 3;
+}
+.language-switch__toggle:checked~.languages-list {
+    transform: translateY(45px);
+}
+
+.lenguage-switch__marker--en {
+background-position: 50% 50%;
+background-image: url(/en.308b3912.png);
+background-size: cover;
+}
+.lenguage-switch__marker--pl {
+
+    background-position: 50% 50%;
+    background-image: url(/pl.76d46dd7.png);
+    background-size: cover;
+}
+.lenguage-switch__marker--ru {
+    background-position: 50% 50%;
+    background-image: url(/ru.9148cb47.png);
+    background-size: cover;
+}
+
+.language-switch__track {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    color: transparent;
+    user-select: none;
+    background-color: #a4a4a4;
+    border-radius: inherit;
+    z-index: 1;
+    cursor: pointer;
+  
+}
+
+.languages-list {
+    display: flex;
+   position: relative;
+   bottom:45px;
+   right: 90px;
+    transition: transform linear 250ms;
+}
+.languages-list-item:not(:last-child) {
+    margin-right: 3px;
+}
+
+
+/* heder and ------------------------------------- */
+
+.search-filter {
     max-width: 600px;
     display: flex;
     margin: 0 auto;
 }
-.navigation-btn {
+.sf-btn {
 
     width: 200px;
     padding: 10px 0px;
@@ -70,7 +247,7 @@ body {
 
     background-color: rgb(152, 152, 255);
     padding:  80px 20px;
-    background-image: url(/base-bk.1fd260e4.jpg);
+    background-image: url(/base-bk.651eca7a.jpg);
     /* background-size: cover; */
     opacity: 0.8;
 }
@@ -157,7 +334,7 @@ color: rgba(0, 0, 0, 0.4);
     /* background-color: rgba(100, 100, 100, 0.2);
         min-height: 100vh; */
     margin: 0 auto;
-    max-width: 1280px;
+    max-width: 2120px;
     padding-bottom: 20px;
 }
 

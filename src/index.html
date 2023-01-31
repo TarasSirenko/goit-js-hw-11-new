@@ -6,12 +6,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body>
+  <body class="light-theme">
     <main>
-      <div class="navigation">
-        <button class="navigation-btn">Pictures</button
-        ><button class="navigation-btn">Video</button
-        ><button class="navigation-btn">Audio</button>
+      <header class="heder">
+        <div class="heder-container">
+          <div class="logo">
+            <a href="" class="logo-link"></a>
+          </div>
+          <!-- <div class="navigation"> -->
+          <ul class="navigation-list">
+            <li class="navigation-item">
+              <a href="" class="navigation-link">Home</a>
+            </li>
+            <li class="navigation-item">
+              <a href="" class="navigation-link">My favorite</a>
+            </li>
+          </ul>
+          <!-- </div> -->
+          <div class="options">
+            <ul class="options-list">
+              <li class="options-item">
+                <div class="switch">
+                   <label  aria-hidden="true"
+                    class="language-switch__track lenguage-switch__marker--en"
+                    for="lenguage-switch-toggle">
+                </label>
+                  <input type="checkbox" 
+                  class="language-switch__toggle visually-hidden"  
+                  name="lenguage"
+                  id="lenguage-switch-toggle"
+                  aria-label="Переключить язык"/>
+             
+                <ul class="languages-list">
+                  <li class="languages-list-item">
+                    <div aria-hidden="true" class="lenguage-switch__marker lenguage-switch__marker--pl " data-name = 'pl'></div>
+                </li>
+                  <li class="languages-list-item">
+                    <div aria-hidden="true" class="lenguage-switch__marker lenguage-switch__marker--en " data-name = 'en' ></div>
+                  </li>
+                  <li class="languages-list-item">
+                       <div aria-hidden="true" class="lenguage-switch__marker lenguage-switch__marker--ru " data-name = 'ru'></div>
+                  </li>
+                </ul>
+                </div>
+               
+              </li>
+              <li class="options-item"> 
+                   <div class="switch switch--them">
+                      <input
+                     class="theme-switch__toggle visually-hidden"
+                       type="checkbox"
+                      name="theme"
+                    id="theme-switch-toggle"
+                        aria-label="Переключить между тёмной и светлой темой"
+                     />
+                           <label
+                             aria-hidden="true"
+                             class="theme-switch__track"
+                             for="theme-switch-toggle"
+                           >
+                           </label>
+                           <div aria-hidden="true" class="theme-switch__marker"></div>
+                         </div>
+                     </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="search-filter">
+        <button class="sf-btn">Pictures</button
+        ><button class="sf-btn">Video</button
+        ><button class="sf-btn">Audio</button>
       </div>
       <div class="form-wrapper">
         <form class="search-form" id="search-form">
@@ -33,6 +99,27 @@
           Load more
         </button>
       </section>
+
+      <footer>
+        <div class="footer-container">
+          <div class="info">2023@</div>
+          <address></address>
+          <div class="contacts">
+            <ul class="contacts-list">
+              <a href="" class="contacts-link">
+                <li class="contacts-item">гит</li>
+              </a>
+              <a href="" class="contacts-link">
+                <li class="contacts-item">телега</li>
+              </a>
+              <a href="" class="contacts-link">
+                <li class="contacts-item">инста</li>
+              </a>
+            </ul>
+          </div>
+          <a href="#" class="go-up-btn">на верх</a>
+        </div>
+      </footer>
     </main>
 
     <script src="./js/index.js"></script>

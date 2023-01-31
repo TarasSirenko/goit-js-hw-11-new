@@ -2,6 +2,8 @@ import '../css/styles.css';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
+import './change-theme.js';
+import './change-language.js';
 
 import imgCardMarcup from '../hbs/imgCardMarcup.hbs';
 const lightboxGallery = new SimpleLightbox('.gallery a');
@@ -26,6 +28,14 @@ const Refs = {
   requestForm: document.querySelector('#search-form'),
   loadMoreButton: document.querySelector('.load-more'),
 };
+
+// Refs.languageSwitch.addEventListener('click', e => {
+//   console.dir(e.target.checked);
+//   const lenguageMarkers = document.querySelector('.languages-list');
+//   console.log(lenguageMarkers);
+//   // lenguageMarkers.classList.toggle('visually-hidden');
+//   console.dir();
+// });
 
 // auxiliary variables--------------
 let requestUser = 'black and white';
