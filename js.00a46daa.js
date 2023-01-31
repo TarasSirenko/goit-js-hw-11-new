@@ -172,7 +172,7 @@ module.exports = reloadCSS;
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./..\\..\\img\\base-bk.jpg":[["base-bk.1fd260e4.jpg","../img/base-bk.jpg"],"../img/base-bk.jpg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/simplelightbox/dist/simple-lightbox.min.css":[function(require,module,exports) {
+},{"./..\\img\\en.png":[["en.308b3912.png","img/en.png"],"img/en.png"],"./..\\img\\pl.png":[["pl.76d46dd7.png","img/pl.png"],"img/pl.png"],"./..\\img\\ru.png":[["ru.9148cb47.png","img/ru.png"],"img/ru.png"],"./..\\img\\base-bk.jpg":[["base-bk.651eca7a.jpg","img/base-bk.jpg"],"img/base-bk.jpg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/simplelightbox/dist/simple-lightbox.min.css":[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
@@ -1750,6 +1750,70 @@ var SimpleLightbox = /*#__PURE__*/function () {
 var _default = SimpleLightbox;
 exports["default"] = _default;
 global.SimpleLightbox = SimpleLightbox;
+},{}],"js/change-theme.js":[function(require,module,exports) {
+const Theme = {
+  LIGHT: 'light-theme',
+  DARK: 'dark-theme'
+};
+const refs = {
+  body: document.querySelector('body'),
+  checkbox: document.querySelector('#theme-switch-toggle')
+};
+let currentTheme;
+try {
+  if (localStorage.getItem('currentTheme') === Theme.DARK) {
+    refs.body.classList.toggle(Theme.DARK);
+    refs.body.classList.toggle(Theme.LIGHT);
+    refs.checkbox.checked = true;
+  }
+} catch {}
+refs.checkbox.addEventListener('change', onCheckboxChange);
+function onCheckboxChange() {
+  refs.body.classList.toggle(Theme.DARK);
+  refs.body.classList.toggle(Theme.LIGHT);
+  refs.checkbox.checked ? currentTheme = Theme.DARK : currentTheme = Theme.LIGHT;
+  localStorage.setItem('currentTheme', currentTheme);
+}
+console.log('vsdv');
+},{}],"js/change-language.js":[function(require,module,exports) {
+const Refs = {
+  languageSwitch: document.querySelector('.language-switch__toggle'),
+  languagesList: document.querySelector('.languages-list'),
+  currentLanguage: document.querySelector('.language-switch__track')
+};
+Refs.languagesList.addEventListener('click', onLanguagesListItemClick);
+Refs.languageSwitch.addEventListener('change', e => {
+  console.log(e.target.checked);
+  if (e.target.checked === true) {
+    document.body.addEventListener('click', clos);
+  }
+});
+function clos(e) {
+  if (!e.target.classList.contains('.lenguage-switch__marker')) createEventForClosingLanguagesList();
+}
+function onLanguagesListItemClick(e) {
+  const selectedLanguage = e.target.querySelector('.lenguage-switch__marker');
+  if (Refs.currentLanguage.classList.contains(selectedLanguage.classList[1])) {
+    createEventForClosingLanguagesList();
+    return;
+  }
+  console.log(Refs.languageSwitch.checked === 'true');
+  clearLanguage();
+  changeLanguage(selectedLanguage);
+  createEventForClosingLanguagesList();
+}
+function createEventForClosingLanguagesList() {
+  Refs.languageSwitch.checked = false;
+  document.body.removeEventListener('click', clos);
+}
+function clearLanguage() {
+  Refs.currentLanguage.classList.remove('lenguage-switch__marker--pl', 'lenguage-switch__marker--ru', 'lenguage-switch__marker--en');
+}
+function changeLanguage(language) {
+  if (language.dataset.name === 'ru') Refs.currentLanguage.classList.add('lenguage-switch__marker--ru');
+  if (language.dataset.name === 'pl') Refs.currentLanguage.classList.add('lenguage-switch__marker--pl');
+  if (language.dataset.name === 'en') Refs.currentLanguage.classList.add('lenguage-switch__marker--en');
+}
 },{}],"../node_modules/handlebars/dist/handlebars.runtime.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
@@ -3756,6 +3820,8 @@ require("../css/styles.css");
 require("simplelightbox/dist/simple-lightbox.min.css");
 var _notiflix = _interopRequireDefault(require("notiflix"));
 var _simplelightbox = _interopRequireDefault(require("simplelightbox"));
+require("./change-theme.js");
+require("./change-language.js");
 var _imgCardMarcup = _interopRequireDefault(require("../hbs/imgCardMarcup.hbs"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const lightboxGallery = new _simplelightbox.default('.gallery a');
@@ -3777,6 +3843,14 @@ const Refs = {
   requestForm: document.querySelector('#search-form'),
   loadMoreButton: document.querySelector('.load-more')
 };
+
+// Refs.languageSwitch.addEventListener('click', e => {
+//   console.dir(e.target.checked);
+//   const lenguageMarkers = document.querySelector('.languages-list');
+//   console.log(lenguageMarkers);
+//   // lenguageMarkers.classList.toggle('visually-hidden');
+//   console.dir();
+// });
 
 // auxiliary variables--------------
 let requestUser = 'black and white';
@@ -3861,7 +3935,7 @@ function renderCards(obj) {
 
 //
 //   Refs.gallery.firstElementChild.getBoundingClientRect();
-},{"../css/styles.css":"css/styles.css","simplelightbox/dist/simple-lightbox.min.css":"../node_modules/simplelightbox/dist/simple-lightbox.min.css","notiflix":"../node_modules/notiflix/dist/notiflix-aio-3.2.6.min.js","simplelightbox":"../node_modules/simplelightbox/dist/simple-lightbox.modules.js","../hbs/imgCardMarcup.hbs":"hbs/imgCardMarcup.hbs","lodash.debounce":"../node_modules/lodash.debounce/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"../css/styles.css":"css/styles.css","simplelightbox/dist/simple-lightbox.min.css":"../node_modules/simplelightbox/dist/simple-lightbox.min.css","notiflix":"../node_modules/notiflix/dist/notiflix-aio-3.2.6.min.js","simplelightbox":"../node_modules/simplelightbox/dist/simple-lightbox.modules.js","./change-theme.js":"js/change-theme.js","./change-language.js":"js/change-language.js","../hbs/imgCardMarcup.hbs":"hbs/imgCardMarcup.hbs","lodash.debounce":"../node_modules/lodash.debounce/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -3886,7 +3960,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3560" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "10203" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
