@@ -21,13 +21,11 @@ const Refs = {
 };
 
 // выбор языка при загрузке страницы -------------------------
-let currentLanguage = {};
+let currentLanguage = lenguages.en;
 
 try {
   currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
-} catch {
-  currentLanguage = lenguages.en;
-}
+} catch {}
 function changeLanguage() {
   currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
   for (const key in lengArr) {

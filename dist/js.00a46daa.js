@@ -1851,12 +1851,10 @@ const Refs = {
 };
 
 // выбор языка при загрузке страницы -------------------------
-let currentLanguage = {};
+let currentLanguage = lenguages.en;
 try {
   currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
-} catch {
-  currentLanguage = lenguages.en;
-}
+} catch {}
 function changeLanguage() {
   currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
   for (const key in _language.default) {
@@ -4163,7 +4161,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "6235" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3364" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
