@@ -1849,14 +1849,21 @@ const Refs = {
   languagesList: document.querySelector('.languages-list'),
   currentLanguage: document.querySelector('.language-switch__track')
 };
-
+// localStorage.removeItem('currentLanguage');
 // выбор языка при загрузке страницы -------------------------
-let currentLanguage = lenguages.en;
-try {
+let currentLanguage = {
+  code: 'en',
+  class: 'lenguage-switch__marker--en'
+};
+console.log(currentLanguage);
+if (JSON.parse(localStorage.getItem('currentLanguage'))) {
+  console.log('rvervrr');
   currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
-} catch {}
+} else {
+  currentLanguage = lenguages.en;
+}
 function changeLanguage() {
-  currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
+  if (JSON.parse(localStorage.getItem('currentLanguage'))) currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
   for (const key in _language.default) {
     if (key === 'placeholder') {
       document.querySelector(`.lang-${key}`).placeholder = _language.default[key][currentLanguage.code];
@@ -4031,12 +4038,11 @@ let requestUser = 'nature';
 let currentRequest = '';
 let currentPage = 1;
 let perPage = 30;
-let currentLanguage = {};
-try {
-  currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
-} catch {
-  currentLanguage = lenguages.en;
-}
+let currentLanguage = {
+  code: 'en',
+  class: 'lenguage-switch__marker--en'
+};
+if (JSON.parse(localStorage.getItem('currentLanguage'))) currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
 
 // ----------------------------
 
@@ -4074,7 +4080,7 @@ function clearPage() {
   Refs.loadMoreButton.classList.add('visually-hidden');
 }
 function fechImages() {
-  currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
+  if (JSON.parse(localStorage.getItem('currentLanguage'))) currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
   return fetch(`${BASE_URL}?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&${searchParams}`).then(response => response.json()).then(obj => {
     obj.hits.length === 0 ? onIncorectRequest() : onCorectRequest(obj);
     console.log(obj);
@@ -4161,7 +4167,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3364" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4384" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
