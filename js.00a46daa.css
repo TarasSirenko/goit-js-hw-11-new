@@ -72,14 +72,17 @@ body {
 .navigation-item:not(:last-child) {
     margin-right: 20px;
 }
+.heder {
+background-color: #bdbdbd;
+}
 
 .heder-container {
     display: flex;
     align-items: center;
     max-width: 2120px;
     margin: 0 auto;
-    padding: 10px 20px;
-    background-color: #bdbdbd;
+    padding: 10px 60px;
+  
 }
 
 .options-list {
@@ -100,6 +103,9 @@ background-color: rgb(235, 235, 235);
 
 body.dark-theme {
     background-color: #333333;
+    color: #fff;
+}
+.footer-container.dark-theme a {
     color: #fff;
 }
 
@@ -341,6 +347,38 @@ color: rgba(0, 0, 0, 0.4);
 .load-more {
     display: block;
     margin: 0 auto;
+}
+
+
+.add-favorites {
+    font-size: 15px;
+    color: #000000;
+    background-color: #808080;
+}
+
+/* footer===================== */
+footer {
+background-color: #bdbdbd;
+}
+.footer-container {
+    max-width: 2120px;
+    padding: 20px 40px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.contacts-list {
+    display: flex;
+}
+.contacts-link:not(:last-child) {
+    margin-right: 10px;
+}
+.date {
+    color: #000000;
+    font-size: 13px;
+    text-align: center;
+        margin: 0 auto;
+    background-color: #6e6e6e;
 }
 /*!
 	By André Rinas, www.andrerinas.de
