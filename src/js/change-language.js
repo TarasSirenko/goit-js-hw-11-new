@@ -1,4 +1,5 @@
 import lengArr from '../language.json';
+import { Refs } from './refs.js';
 const lenguages = {
   ru: {
     code: 'ru',
@@ -14,21 +15,14 @@ const lenguages = {
   },
 };
 
-const Refs = {
-  languageSwitch: document.querySelector('.language-switch__toggle'),
-  languagesList: document.querySelector('.languages-list'),
-  currentLanguage: document.querySelector('.language-switch__track'),
-};
 // localStorage.removeItem('currentLanguage');
 // выбор языка при загрузке страницы -------------------------
 let currentLanguage = {
   code: 'en',
   class: 'lenguage-switch__marker--en',
 };
-console.log(currentLanguage);
 
 if (JSON.parse(localStorage.getItem('currentLanguage'))) {
-  console.log('rvervrr');
   currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
 } else {
   currentLanguage = lenguages.en;
@@ -88,7 +82,6 @@ function clearLanguage() {
 function changeIconLanguage(language) {
   if (language.dataset.name === 'ru') {
     currentLanguage = JSON.stringify(lenguages.ru);
-    console.log(currentLanguage);
     localStorage.setItem('currentLanguage', currentLanguage);
     Refs.currentLanguage.classList.add(lenguages.ru.class);
   }

@@ -1,4 +1,44 @@
-const favoritesCardArr = [];
+import imgCardMarcup from '../hbs/imgCardMarcup.hbs';
+export { favoritesCardArr };
+import { Refs } from './refs.js';
+
+let favoritesCardArr = [];
+
+// Переход на страницу с избранным ===============================
+
+Refs.favoritesBtn.addEventListener('click', onFavoritesBtnClick);
+
+function onFavoritesBtnClick(event) {
+  event.preventDefault();
+  const cardsMarkup = createMarcup();
+  renderCard(cardsMarkup);
+  hideElem(Refs.loadMoreButton);
+  changeActivePage(event);
+}
+
+function createMarcup() {
+  return imgCardMarcup(favoritesCardArr);
+}
+function renderCard(marcup) {
+  Refs.gallery.innerHTML = marcup;
+}
+function hideElem(elem) {
+  elem.classList.add('visually-hidden');
+}
+function changeActivePage(event) {
+  event.target.classList.add('activ');
+  Refs.homeBtn.classList.remove('activ');
+}
+// ===============================
+
+// проверка localStorage на информацию о избранных обектих
+
+if (localStorage.getItem('favoritesCard')) {
+  favoritesCardArr = JSON.parse(localStorage.getItem('favoritesCard'));
+}
+// ===============================
+
+// Добавление, удаление и хранение избранных обектов
 
 document.body.addEventListener('click', onAddFavoritesBtnClick);
 
@@ -8,12 +48,13 @@ function onAddFavoritesBtnClick(event) {
     const id = event.target.closest('.photo-card').dataset.id;
     const cardToBeRemoved = getCardById(favoritesCardArr, id);
     const updatedArr = removeCard(favoritesCardArr, cardToBeRemoved);
-    console.log(updatedArr);
+    updateLocalStorage(updatedArr);
+
     return;
   }
   const newCard = createObjCard(event);
   const updatedArr = addCardInFavorites(favoritesCardArr, newCard);
-  console.log(updatedArr);
+  updateLocalStorage(updatedArr);
 }
 
 function createObjCard(event) {
@@ -35,6 +76,7 @@ function createObjCard(event) {
     views,
     comments,
     downloads,
+    check: 'checked',
   };
 }
 
@@ -51,6 +93,10 @@ function removeCard(arr, card) {
   arr.splice(arr.indexOf(card), 1);
   return arr;
 }
+function updateLocalStorage(arr) {
+  localStorage.setItem('favoritesCard', JSON.stringify(arr));
+}
+// ====================================================
 
 // кастомные айди
 // function idGenerator(arr, newElement) {

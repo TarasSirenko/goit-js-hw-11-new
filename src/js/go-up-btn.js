@@ -1,7 +1,4 @@
-const Refs = {
-  goUpBtn: document.querySelector('.go-up-btn'),
-  heder: document.querySelector('.heder'),
-};
+import { Refs } from './refs.js';
 
 Refs.goUpBtn.addEventListener('click', onGoUpBtnClick);
 

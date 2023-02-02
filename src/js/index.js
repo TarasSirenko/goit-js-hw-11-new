@@ -6,8 +6,12 @@ import './change-theme.js';
 import './change-language.js';
 import './go-up-btn.js';
 import './add-favorites.js';
-
+import './home.js';
 import imgCardMarcup from '../hbs/imgCardMarcup.hbs';
+import { favoritesCardArr } from './add-favorites';
+
+import { Refs } from './refs.js';
+
 const lightboxGallery = new SimpleLightbox('.gallery a');
 
 Notiflix.Notify.init({
@@ -22,14 +26,6 @@ Notiflix.Notify.init({
 const debounce = require('lodash.debounce');
 const BASE_URL = 'https://pixabay.com/api/';
 const DEBOUNCE_DELAY = 50;
-
-const Refs = {
-  userInput: document.querySelector('[name="searchQuery"]'),
-  gallery: document.querySelector('.gallery'),
-  submitButton: document.querySelector('[type="submit"]'),
-  requestForm: document.querySelector('#search-form'),
-  loadMoreButton: document.querySelector('.load-more'),
-};
 
 // auxiliary variables--------------
 let requestUser = 'nature';
@@ -99,7 +95,7 @@ function fechImages() {
     .then(response => response.json())
     .then(obj => {
       obj.hits.length === 0 ? onIncorectRequest() : onCorectRequest(obj);
-      console.log(obj);
+      // console.log(obj);
       return obj;
     });
 }
@@ -122,13 +118,16 @@ function onIncorectRequest() {
 }
 
 function onCorectRequest(obj) {
-  renderCards(obj);
+  const cards = militaryFavorites(obj, favoritesCardArr);
+  renderCards(cards);
   Refs.loadMoreButton.classList.remove('visually-hidden');
   if (perPage * currentPage > obj.totalHits) whenQueryResultsEnd();
   lightboxGallery.refresh();
   currentRequest = requestUser;
 
-  if (currentPage > 1) {
+  if (currentPage > 1 && Refs.homeBtn.classList.contains('activ')) {
+    // console.log(Refs.favoritesBtn.classList.contains('activ'));
+    console.log('sdvsdsv');
     setTimeout(() => {
       window.scrollBy({
         top: window.innerHeight - 160,
@@ -145,27 +144,33 @@ function whenQueryResultsEnd() {
   );
 }
 
-function renderCards(obj) {
-  Refs.gallery.insertAdjacentHTML('beforeend', imgCardMarcup(obj.hits));
+function renderCards(cards) {
+  Refs.gallery.insertAdjacentHTML('beforeend', imgCardMarcup(cards));
 }
 
-//
-//   Refs.gallery.firstElementChild.getBoundingClientRect();
+function militaryFavorites(obj, favorites) {
+  const idFavoritesArr = favorites.map(card => card.id);
 
-// const lang = {
-//   home: { en: 'Home', pl: 'Dom', ru: 'Домой' },
-//   favorites: { en: 'Favorites', pl: 'Ulubione', ru: 'Избранное' },
-//   picturesBtn: { en: 'Pictures', pl: 'Kino', ru: 'Картинки' },
-//   videoBtn: { en: 'Video', pl: 'Wideo', ru: 'Видео' },
-//   audioBtn: { en: 'Audio', pl: 'Audio', ru: 'Аудио' },
-//   searchBtn: { en: 'Search', pl: 'Szukaj', ru: 'Поиск' },
-//   placeholder: {
-//     en: 'keywords...',
-//     pl: 'słowa kluczowe...',
-//     ru: 'ключевые слова...',
-//   },
-//   loadMoreBtn: { en: 'Load more', pl: 'Załaduj więcej', ru: 'Загрузить еще' },
-//   goUpBtn: { en: 'Go up', pl: 'Wchodzić', ru: 'На верх' },
-// };
+  const favoritesCards = obj.hits.map(el => {
+    if (idFavoritesArr.includes(String(el.id))) {
+      el.check = 'checked';
+    }
+    return el;
+  });
+  return favoritesCards;
+}
 
-// console.log(JSON.stringify(lang));
+// hom btn click
+Refs.homeBtn.addEventListener('click', onHomeBtnClick);
+
+function onHomeBtnClick(event) {
+  event.preventDefault();
+  changeActivePage(event);
+}
+
+function changeActivePage(event) {
+  console.log(!Refs.favoritesBtn.classList.contains('activ'));
+  fechImages();
+  Refs.favoritesBtn.classList.remove('activ');
+  event.target.classList.add('activ');
+}
