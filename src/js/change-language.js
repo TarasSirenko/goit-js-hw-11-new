@@ -19,15 +19,25 @@ const Refs = {
   languagesList: document.querySelector('.languages-list'),
   currentLanguage: document.querySelector('.language-switch__track'),
 };
-
+// localStorage.removeItem('currentLanguage');
 // выбор языка при загрузке страницы -------------------------
-let currentLanguage = lenguages.en;
+let currentLanguage = {
+  code: 'en',
+  class: 'lenguage-switch__marker--en',
+};
+console.log(currentLanguage);
 
-try {
+if (JSON.parse(localStorage.getItem('currentLanguage'))) {
+  console.log('rvervrr');
   currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
-} catch {}
+} else {
+  currentLanguage = lenguages.en;
+}
+
 function changeLanguage() {
-  currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
+  if (JSON.parse(localStorage.getItem('currentLanguage')))
+    currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
+
   for (const key in lengArr) {
     if (key === 'placeholder') {
       document.querySelector(`.lang-${key}`).placeholder =

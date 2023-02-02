@@ -38,13 +38,13 @@ let currentRequest = '';
 let currentPage = 1;
 let perPage = 30;
 
-let currentLanguage = {};
+let currentLanguage = {
+  code: 'en',
+  class: 'lenguage-switch__marker--en',
+};
 
-try {
+if (JSON.parse(localStorage.getItem('currentLanguage')))
   currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
-} catch {
-  currentLanguage = lenguages.en;
-}
 
 // ----------------------------
 
@@ -91,7 +91,8 @@ function clearPage() {
 }
 
 function fechImages() {
-  currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
+  if (JSON.parse(localStorage.getItem('currentLanguage')))
+    currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
   return fetch(
     `${BASE_URL}?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&${searchParams}`
   )
