@@ -1,21 +1,31 @@
 {{#each this}}
-<a class="card-link" href="{{this.largeImageURL}}">
-    <div class="photo-card">
-<img src="{{this.webformatURL}}" alt="{{this.tags}}" loading="lazy" />
+
+<div class="photo-card" data-id = {{this.id}}>
+    <a class="card-link" href="{{this.largeImageURL}}">
+        <img src="{{this.webformatURL}}" alt="{{this.tags}}" loading="lazy"  class="card-img"/>
+    </a>
     <div class="info">
         <p class="info-item">
-            <b>Likes: {{this.likes}}</b>
+            <b>{{this.tags}}</b>
+        </p>
+        <button class="add-favorites"> добавить в избранное </button>
+<label aria-hidden="true" class="label-add-favorites ">
+                    <input class="add-favorites" type="checkbox" 
+                        aria-label="добавление в избранное" />
+                    </label>
+        <p class="info-item">
+            <b class="likes">L: {{this.likes}}</b>
         </p>
         <p class="info-item">
-            <b>Views: {{this.views}}</b>
+            <b class="views">V: {{this.views}}</b>
         </p>
         <p class="info-item">
-            <b>Comments: {{this.comments}}</b>
+            <b class="comments">C: {{this.comments}}</b>
         </p>
         <p class="info-item">
-            <b>Downloads: {{this.downloads}}</b>
+            <b class="downloads">D: {{this.downloads}}</b>
         </p>
     </div>
 </div>
-</a>
+
 {{/each}}
