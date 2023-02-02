@@ -1750,34 +1750,57 @@ var SimpleLightbox = /*#__PURE__*/function () {
 var _default = SimpleLightbox;
 exports["default"] = _default;
 global.SimpleLightbox = SimpleLightbox;
+},{}],"js/refs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Refs = void 0;
+const Refs = {
+  userInput: document.querySelector('[name="searchQuery"]'),
+  gallery: document.querySelector('.gallery'),
+  submitButton: document.querySelector('[type="submit"]'),
+  requestForm: document.querySelector('#search-form'),
+  loadMoreButton: document.querySelector('.load-more'),
+  favoritesBtn: document.querySelector('.lang-favorites'),
+  homeBtn: document.querySelector('.lang-home'),
+  goUpBtn: document.querySelector('.go-up-btn'),
+  heder: document.querySelector('.heder'),
+  body: document.querySelector('body'),
+  checkbox: document.querySelector('#theme-switch-toggle'),
+  footer: document.querySelector('.footer-container'),
+  languageSwitch: document.querySelector('.language-switch__toggle'),
+  languagesList: document.querySelector('.languages-list'),
+  currentLanguage: document.querySelector('.language-switch__track')
+};
+exports.Refs = Refs;
 },{}],"js/change-theme.js":[function(require,module,exports) {
+"use strict";
+
+var _refs = require("./refs.js");
 const Theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme'
 };
-const refs = {
-  body: document.querySelector('body'),
-  checkbox: document.querySelector('#theme-switch-toggle'),
-  footer: document.querySelector('.footer-container')
-};
 let currentTheme;
 try {
   if (localStorage.getItem('currentTheme') === Theme.DARK) {
-    refs.body.classList.toggle(Theme.DARK);
-    refs.body.classList.toggle(Theme.LIGHT);
-    refs.footer.classList.toggle(Theme.DARK);
-    refs.checkbox.checked = true;
+    _refs.Refs.body.classList.toggle(Theme.DARK);
+    _refs.Refs.body.classList.toggle(Theme.LIGHT);
+    _refs.Refs.footer.classList.toggle(Theme.DARK);
+    _refs.Refs.checkbox.checked = true;
   }
 } catch {}
-refs.checkbox.addEventListener('change', onCheckboxChange);
+_refs.Refs.checkbox.addEventListener('change', onCheckboxChange);
 function onCheckboxChange() {
-  refs.body.classList.toggle(Theme.DARK);
-  refs.body.classList.toggle(Theme.LIGHT);
-  refs.footer.classList.toggle(Theme.DARK);
-  refs.checkbox.checked ? currentTheme = Theme.DARK : currentTheme = Theme.LIGHT;
+  _refs.Refs.body.classList.toggle(Theme.DARK);
+  _refs.Refs.body.classList.toggle(Theme.LIGHT);
+  _refs.Refs.footer.classList.toggle(Theme.DARK);
+  _refs.Refs.checkbox.checked ? currentTheme = Theme.DARK : currentTheme = Theme.LIGHT;
   localStorage.setItem('currentTheme', currentTheme);
 }
-},{}],"language.json":[function(require,module,exports) {
+},{"./refs.js":"js/refs.js"}],"language.json":[function(require,module,exports) {
 module.exports = {
   "home": {
     "en": "Home",
@@ -1829,6 +1852,7 @@ module.exports = {
 "use strict";
 
 var _language = _interopRequireDefault(require("../language.json"));
+var _refs = require("./refs.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const lenguages = {
   ru: {
@@ -1844,20 +1868,14 @@ const lenguages = {
     class: 'lenguage-switch__marker--en'
   }
 };
-const Refs = {
-  languageSwitch: document.querySelector('.language-switch__toggle'),
-  languagesList: document.querySelector('.languages-list'),
-  currentLanguage: document.querySelector('.language-switch__track')
-};
+
 // localStorage.removeItem('currentLanguage');
 // выбор языка при загрузке страницы -------------------------
 let currentLanguage = {
   code: 'en',
   class: 'lenguage-switch__marker--en'
 };
-console.log(currentLanguage);
 if (JSON.parse(localStorage.getItem('currentLanguage'))) {
-  console.log('rvervrr');
   currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
 } else {
   currentLanguage = lenguages.en;
@@ -1873,16 +1891,16 @@ function changeLanguage() {
   }
 }
 changeLanguage();
-Refs.currentLanguage.classList.add(currentLanguage.class);
+_refs.Refs.currentLanguage.classList.add(currentLanguage.class);
 // ===================== -------------------------
 
-Refs.languagesList.addEventListener('click', onLanguagesListItemClick);
-Refs.languageSwitch.addEventListener('change', onCheckedLanguageSwitch);
+_refs.Refs.languagesList.addEventListener('click', onLanguagesListItemClick);
+_refs.Refs.languageSwitch.addEventListener('change', onCheckedLanguageSwitch);
 
 // ===============================onLanguagesListItemClick
 function onLanguagesListItemClick(event) {
   const selectedLanguage = event.target.querySelector('.lenguage-switch__marker');
-  if (Refs.currentLanguage.classList.contains(selectedLanguage.classList[1])) {
+  if (_refs.Refs.currentLanguage.classList.contains(selectedLanguage.classList[1])) {
     createEventForClosingLanguagesList();
     return;
   }
@@ -1892,28 +1910,27 @@ function onLanguagesListItemClick(event) {
   createEventForClosingLanguagesList();
 }
 function createEventForClosingLanguagesList() {
-  Refs.languageSwitch.checked = false;
+  _refs.Refs.languageSwitch.checked = false;
   document.body.removeEventListener('click', closesLanguagesList);
 }
 function clearLanguage() {
-  Refs.currentLanguage.classList.remove(lenguages.ru.class, lenguages.pl.class, lenguages.en.class);
+  _refs.Refs.currentLanguage.classList.remove(lenguages.ru.class, lenguages.pl.class, lenguages.en.class);
 }
 function changeIconLanguage(language) {
   if (language.dataset.name === 'ru') {
     currentLanguage = JSON.stringify(lenguages.ru);
-    console.log(currentLanguage);
     localStorage.setItem('currentLanguage', currentLanguage);
-    Refs.currentLanguage.classList.add(lenguages.ru.class);
+    _refs.Refs.currentLanguage.classList.add(lenguages.ru.class);
   }
   if (language.dataset.name === 'pl') {
     currentLanguage = JSON.stringify(lenguages.pl);
     localStorage.setItem('currentLanguage', currentLanguage);
-    Refs.currentLanguage.classList.add(lenguages.pl.class);
+    _refs.Refs.currentLanguage.classList.add(lenguages.pl.class);
   }
   if (language.dataset.name === 'en') {
     currentLanguage = JSON.stringify(lenguages.en);
     localStorage.setItem('currentLanguage', currentLanguage);
-    Refs.currentLanguage.classList.add(lenguages.en.class);
+    _refs.Refs.currentLanguage.classList.add(lenguages.en.class);
   }
 }
 
@@ -1923,85 +1940,24 @@ function onCheckedLanguageSwitch(event) {
 }
 function closesLanguagesList(e) {
   if (e.target.classList.contains('language-switch__track')) {
-    Refs.languageSwitch.checked = false;
+    _refs.Refs.languageSwitch.checked = false;
     return;
   }
   createEventForClosingLanguagesList();
 }
-},{"../language.json":"language.json"}],"js/go-up-btn.js":[function(require,module,exports) {
-const Refs = {
-  goUpBtn: document.querySelector('.go-up-btn'),
-  heder: document.querySelector('.heder')
-};
-Refs.goUpBtn.addEventListener('click', onGoUpBtnClick);
+},{"../language.json":"language.json","./refs.js":"js/refs.js"}],"js/go-up-btn.js":[function(require,module,exports) {
+"use strict";
+
+var _refs = require("./refs.js");
+_refs.Refs.goUpBtn.addEventListener('click', onGoUpBtnClick);
 function onGoUpBtnClick(e) {
   e.preventDefault();
-  Refs.heder.scrollIntoView({
+  _refs.Refs.heder.scrollIntoView({
     block: 'center',
     behavior: 'smooth'
   });
 }
-},{}],"js/add-favorites.js":[function(require,module,exports) {
-const favoritesCardArr = [];
-document.body.addEventListener('click', onAddFavoritesBtnClick);
-function onAddFavoritesBtnClick(event) {
-  if (!event.target.classList.contains('add-favorites')) return;
-  if (!event.target.checked) {
-    const id = event.target.closest('.photo-card').dataset.id;
-    const cardToBeRemoved = getCardById(favoritesCardArr, id);
-    const updatedArr = removeCard(favoritesCardArr, cardToBeRemoved);
-    console.log(updatedArr);
-    return;
-  }
-  const newCard = createObjCard(event);
-  const updatedArr = addCardInFavorites(favoritesCardArr, newCard);
-  console.log(updatedArr);
-}
-function createObjCard(event) {
-  const currentCard = event.target.closest('.photo-card');
-  const id = currentCard.dataset.id;
-  const largeImageURL = currentCard.querySelector('.card-link').href;
-  const webformatURL = currentCard.querySelector('.card-img').src;
-  const tags = currentCard.querySelector('.card-img').alt;
-  const likes = currentCard.querySelector('.likes').outerText;
-  const views = currentCard.querySelector('.views').outerText;
-  const comments = currentCard.querySelector('.comments').outerText;
-  const downloads = currentCard.querySelector('.downloads').outerText;
-  return {
-    id,
-    largeImageURL,
-    webformatURL,
-    tags,
-    likes,
-    views,
-    comments,
-    downloads
-  };
-}
-function getCardById(arr, id) {
-  return arr.find(card => card.id === id);
-}
-function addCardInFavorites(arr, newCard) {
-  arr.push(newCard);
-  return arr;
-}
-function removeCard(arr, card) {
-  arr.splice(arr.indexOf(card), 1);
-  return arr;
-}
-
-// кастомные айди
-// function idGenerator(arr, newElement) {
-//   const newId = parseInt(Math.random() * (10 - 1));
-//   for (card of arr) {
-//     if (card.id === newId) {
-//       return idGenerator(arr, newElement);
-//     }
-//   }
-//   newElement.id = newId;
-//   return newElement;
-// }
-},{}],"../node_modules/handlebars/dist/handlebars.runtime.js":[function(require,module,exports) {
+},{"./refs.js":"js/refs.js"}],"../node_modules/handlebars/dist/handlebars.runtime.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /**!
@@ -3587,7 +3543,7 @@ const templateFunction = _handlebars.default.template({
         }
         return undefined;
       };
-    return "\r\n<div class=\"photo-card\" data-id = " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "id") : depth0, depth0)) + ">\r\n    <a class=\"card-link\" href=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "largeImageURL") : depth0, depth0)) + "\">\r\n        <img src=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "webformatURL") : depth0, depth0)) + "\" alt=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "\" loading=\"lazy\"  class=\"card-img\"/>\r\n    </a>\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <button class=\"add-favorites\"> добавить в избранное </button>\r\n<label aria-hidden=\"true\" class=\"label-add-favorites \">\r\n                    <input class=\"add-favorites\" type=\"checkbox\" \r\n                        aria-label=\"добавление в избранное\" />\r\n                    </label>\r\n        <p class=\"info-item\">\r\n            <b class=\"likes\">L: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"views\">V: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"comments\">C: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"downloads\">D: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n        </p>\r\n    </div>\r\n</div>\r\n\r\n";
+    return "\r\n<div class=\"photo-card\" data-id = " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "id") : depth0, depth0)) + ">\r\n    <a class=\"card-link\" href=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "largeImageURL") : depth0, depth0)) + "\">\r\n        <img src=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "webformatURL") : depth0, depth0)) + "\" alt=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "\" loading=\"lazy\"  class=\"card-img\"/>\r\n    </a>\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <button class=\"add-favorites\"> добавить в избранное </button>\r\n<label aria-hidden=\"true\" class=\"label-add-favorites \">\r\n                    <input class=\"add-favorites\" type=\"checkbox\" \r\n                        aria-label=\"добавление в избранное\" " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "check") : depth0, depth0)) + "/> \r\n                    </label>\r\n        <p class=\"info-item\">\r\n            <b class=\"likes\">L: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"views\">V: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"comments\">C: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"downloads\">D: " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n        </p>\r\n    </div>\r\n</div>\r\n\r\n";
   },
   "compiler": [8, ">= 4.3.0"],
   "main": function (container, depth0, helpers, partials, data) {
@@ -3620,7 +3576,120 @@ const templateFunction = _handlebars.default.template({
 });
 var _default = templateFunction;
 exports.default = _default;
-},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"../node_modules/lodash.debounce/index.js":[function(require,module,exports) {
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"js/add-favorites.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.favoritesCardArr = void 0;
+var _imgCardMarcup = _interopRequireDefault(require("../hbs/imgCardMarcup.hbs"));
+var _refs = require("./refs.js");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+let favoritesCardArr = [];
+
+// Переход на страницу с избранным ===============================
+exports.favoritesCardArr = favoritesCardArr;
+_refs.Refs.favoritesBtn.addEventListener('click', onFavoritesBtnClick);
+function onFavoritesBtnClick(event) {
+  event.preventDefault();
+  const cardsMarkup = createMarcup();
+  renderCard(cardsMarkup);
+  hideElem(_refs.Refs.loadMoreButton);
+  changeActivePage(event);
+}
+function createMarcup() {
+  return (0, _imgCardMarcup.default)(favoritesCardArr);
+}
+function renderCard(marcup) {
+  _refs.Refs.gallery.innerHTML = marcup;
+}
+function hideElem(elem) {
+  elem.classList.add('visually-hidden');
+}
+function changeActivePage(event) {
+  event.target.classList.add('activ');
+  _refs.Refs.homeBtn.classList.remove('activ');
+}
+// ===============================
+
+// проверка localStorage на информацию о избранных обектих
+
+if (localStorage.getItem('favoritesCard')) {
+  exports.favoritesCardArr = favoritesCardArr = JSON.parse(localStorage.getItem('favoritesCard'));
+}
+// ===============================
+
+// Добавление, удаление и хранение избранных обектов
+
+document.body.addEventListener('click', onAddFavoritesBtnClick);
+function onAddFavoritesBtnClick(event) {
+  if (!event.target.classList.contains('add-favorites')) return;
+  if (!event.target.checked) {
+    const id = event.target.closest('.photo-card').dataset.id;
+    const cardToBeRemoved = getCardById(favoritesCardArr, id);
+    const updatedArr = removeCard(favoritesCardArr, cardToBeRemoved);
+    updateLocalStorage(updatedArr);
+    return;
+  }
+  const newCard = createObjCard(event);
+  const updatedArr = addCardInFavorites(favoritesCardArr, newCard);
+  updateLocalStorage(updatedArr);
+}
+function createObjCard(event) {
+  const currentCard = event.target.closest('.photo-card');
+  const id = currentCard.dataset.id;
+  const largeImageURL = currentCard.querySelector('.card-link').href;
+  const webformatURL = currentCard.querySelector('.card-img').src;
+  const tags = currentCard.querySelector('.card-img').alt;
+  const likes = currentCard.querySelector('.likes').outerText;
+  const views = currentCard.querySelector('.views').outerText;
+  const comments = currentCard.querySelector('.comments').outerText;
+  const downloads = currentCard.querySelector('.downloads').outerText;
+  return {
+    id,
+    largeImageURL,
+    webformatURL,
+    tags,
+    likes,
+    views,
+    comments,
+    downloads,
+    check: 'checked'
+  };
+}
+function getCardById(arr, id) {
+  return arr.find(card => card.id === id);
+}
+function addCardInFavorites(arr, newCard) {
+  arr.push(newCard);
+  return arr;
+}
+function removeCard(arr, card) {
+  arr.splice(arr.indexOf(card), 1);
+  return arr;
+}
+function updateLocalStorage(arr) {
+  localStorage.setItem('favoritesCard', JSON.stringify(arr));
+}
+// ====================================================
+
+// кастомные айди
+// function idGenerator(arr, newElement) {
+//   const newId = parseInt(Math.random() * (10 - 1));
+//   for (card of arr) {
+//     if (card.id === newId) {
+//       return idGenerator(arr, newElement);
+//     }
+//   }
+//   newElement.id = newId;
+//   return newElement;
+// }
+},{"../hbs/imgCardMarcup.hbs":"hbs/imgCardMarcup.hbs","./refs.js":"js/refs.js"}],"js/home.js":[function(require,module,exports) {
+"use strict";
+
+var _refs = require("./refs.js");
+},{"./refs.js":"js/refs.js"}],"../node_modules/lodash.debounce/index.js":[function(require,module,exports) {
 var global = arguments[3];
 /**
  * lodash (Custom Build) <https://lodash.com/>
@@ -4011,7 +4080,10 @@ require("./change-theme.js");
 require("./change-language.js");
 require("./go-up-btn.js");
 require("./add-favorites.js");
+require("./home.js");
 var _imgCardMarcup = _interopRequireDefault(require("../hbs/imgCardMarcup.hbs"));
+var _addFavorites2 = require("./add-favorites");
+var _refs = require("./refs.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const lightboxGallery = new _simplelightbox.default('.gallery a');
 _notiflix.default.Notify.init({
@@ -4025,13 +4097,6 @@ _notiflix.default.Notify.init({
 const debounce = require('lodash.debounce');
 const BASE_URL = 'https://pixabay.com/api/';
 const DEBOUNCE_DELAY = 50;
-const Refs = {
-  userInput: document.querySelector('[name="searchQuery"]'),
-  gallery: document.querySelector('.gallery'),
-  submitButton: document.querySelector('[type="submit"]'),
-  requestForm: document.querySelector('#search-form'),
-  loadMoreButton: document.querySelector('.load-more')
-};
 
 // auxiliary variables--------------
 let requestUser = 'nature';
@@ -4053,10 +4118,10 @@ const searchParams = new URLSearchParams({
   safesearch: 'true',
   per_page: 30
 });
-Refs.requestForm.addEventListener('submit', event => event.preventDefault());
-Refs.userInput.addEventListener('input', debounce(onUserInput, DEBOUNCE_DELAY));
-Refs.submitButton.addEventListener('click', onSubmitBtnClick);
-Refs.loadMoreButton.addEventListener('click', onLoadMoreBtnClick);
+_refs.Refs.requestForm.addEventListener('submit', event => event.preventDefault());
+_refs.Refs.userInput.addEventListener('input', debounce(onUserInput, DEBOUNCE_DELAY));
+_refs.Refs.submitButton.addEventListener('click', onSubmitBtnClick);
+_refs.Refs.loadMoreButton.addEventListener('click', onLoadMoreBtnClick);
 fechImages();
 function onSubmitBtnClick() {
   if (requestUser === currentRequest && !(requestUser === '') && JSON.stringify(currentLanguage) === localStorage.getItem('currentLanguage')) return;
@@ -4076,14 +4141,14 @@ function searchResultMessage(obj) {
   });
 }
 function clearPage() {
-  Refs.gallery.innerHTML = '';
-  Refs.loadMoreButton.classList.add('visually-hidden');
+  _refs.Refs.gallery.innerHTML = '';
+  _refs.Refs.loadMoreButton.classList.add('visually-hidden');
 }
 function fechImages() {
   if (JSON.parse(localStorage.getItem('currentLanguage'))) currentLanguage = JSON.parse(localStorage.getItem('currentLanguage'));
   return fetch(`${BASE_URL}?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&${searchParams}`).then(response => response.json()).then(obj => {
     obj.hits.length === 0 ? onIncorectRequest() : onCorectRequest(obj);
-    console.log(obj);
+    // console.log(obj);
     return obj;
   });
 }
@@ -4100,12 +4165,15 @@ function onIncorectRequest() {
   return {};
 }
 function onCorectRequest(obj) {
-  renderCards(obj);
-  Refs.loadMoreButton.classList.remove('visually-hidden');
+  const cards = militaryFavorites(obj, _addFavorites2.favoritesCardArr);
+  renderCards(cards);
+  _refs.Refs.loadMoreButton.classList.remove('visually-hidden');
   if (perPage * currentPage > obj.totalHits) whenQueryResultsEnd();
   lightboxGallery.refresh();
   currentRequest = requestUser;
-  if (currentPage > 1) {
+  if (currentPage > 1 && _refs.Refs.homeBtn.classList.contains('activ')) {
+    // console.log(Refs.favoritesBtn.classList.contains('activ'));
+    console.log('sdvsdsv');
     setTimeout(() => {
       window.scrollBy({
         top: window.innerHeight - 160,
@@ -4115,34 +4183,36 @@ function onCorectRequest(obj) {
   }
 }
 function whenQueryResultsEnd() {
-  Refs.loadMoreButton.classList.add('visually-hidden');
+  _refs.Refs.loadMoreButton.classList.add('visually-hidden');
   _notiflix.default.Notify.info('We`re sorry, but you`ve reached the end of search results.');
 }
-function renderCards(obj) {
-  Refs.gallery.insertAdjacentHTML('beforeend', (0, _imgCardMarcup.default)(obj.hits));
+function renderCards(cards) {
+  _refs.Refs.gallery.insertAdjacentHTML('beforeend', (0, _imgCardMarcup.default)(cards));
+}
+function militaryFavorites(obj, favorites) {
+  const idFavoritesArr = favorites.map(card => card.id);
+  const favoritesCards = obj.hits.map(el => {
+    if (idFavoritesArr.includes(String(el.id))) {
+      el.check = 'checked';
+    }
+    return el;
+  });
+  return favoritesCards;
 }
 
-//
-//   Refs.gallery.firstElementChild.getBoundingClientRect();
-
-// const lang = {
-//   home: { en: 'Home', pl: 'Dom', ru: 'Домой' },
-//   favorites: { en: 'Favorites', pl: 'Ulubione', ru: 'Избранное' },
-//   picturesBtn: { en: 'Pictures', pl: 'Kino', ru: 'Картинки' },
-//   videoBtn: { en: 'Video', pl: 'Wideo', ru: 'Видео' },
-//   audioBtn: { en: 'Audio', pl: 'Audio', ru: 'Аудио' },
-//   searchBtn: { en: 'Search', pl: 'Szukaj', ru: 'Поиск' },
-//   placeholder: {
-//     en: 'keywords...',
-//     pl: 'słowa kluczowe...',
-//     ru: 'ключевые слова...',
-//   },
-//   loadMoreBtn: { en: 'Load more', pl: 'Załaduj więcej', ru: 'Загрузить еще' },
-//   goUpBtn: { en: 'Go up', pl: 'Wchodzić', ru: 'На верх' },
-// };
-
-// console.log(JSON.stringify(lang));
-},{"../css/styles.css":"css/styles.css","simplelightbox/dist/simple-lightbox.min.css":"../node_modules/simplelightbox/dist/simple-lightbox.min.css","notiflix":"../node_modules/notiflix/dist/notiflix-aio-3.2.6.min.js","simplelightbox":"../node_modules/simplelightbox/dist/simple-lightbox.modules.js","./change-theme.js":"js/change-theme.js","./change-language.js":"js/change-language.js","./go-up-btn.js":"js/go-up-btn.js","./add-favorites.js":"js/add-favorites.js","../hbs/imgCardMarcup.hbs":"hbs/imgCardMarcup.hbs","lodash.debounce":"../node_modules/lodash.debounce/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+// hom btn click
+_refs.Refs.homeBtn.addEventListener('click', onHomeBtnClick);
+function onHomeBtnClick(event) {
+  event.preventDefault();
+  changeActivePage(event);
+}
+function changeActivePage(event) {
+  console.log(!_refs.Refs.favoritesBtn.classList.contains('activ'));
+  fechImages();
+  _refs.Refs.favoritesBtn.classList.remove('activ');
+  event.target.classList.add('activ');
+}
+},{"../css/styles.css":"css/styles.css","simplelightbox/dist/simple-lightbox.min.css":"../node_modules/simplelightbox/dist/simple-lightbox.min.css","notiflix":"../node_modules/notiflix/dist/notiflix-aio-3.2.6.min.js","simplelightbox":"../node_modules/simplelightbox/dist/simple-lightbox.modules.js","./change-theme.js":"js/change-theme.js","./change-language.js":"js/change-language.js","./go-up-btn.js":"js/go-up-btn.js","./add-favorites.js":"js/add-favorites.js","./home.js":"js/home.js","../hbs/imgCardMarcup.hbs":"hbs/imgCardMarcup.hbs","./add-favorites":"js/add-favorites.js","./refs.js":"js/refs.js","lodash.debounce":"../node_modules/lodash.debounce/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -4167,7 +4237,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4384" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "8048" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

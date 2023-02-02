@@ -72,6 +72,15 @@ body {
 .navigation-item:not(:last-child) {
     margin-right: 20px;
 }
+.navigation-link {
+    padding: 20px 10px;
+    display: block;
+}
+.navigation-link.activ {
+    background-color: rgba(87, 87, 87,0.4);
+    color: rgb(255, 255, 255);
+}
+
 .heder {
 background-color: #bdbdbd;
 }
@@ -81,7 +90,7 @@ background-color: #bdbdbd;
     align-items: center;
     max-width: 2120px;
     margin: 0 auto;
-    padding: 10px 60px;
+    padding: 0px 60px;
   
 }
 
