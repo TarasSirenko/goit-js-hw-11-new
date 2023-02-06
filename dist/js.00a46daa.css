@@ -1,8 +1,11 @@
+/*! base styles*/
+
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
+
 img {
     max-width: 100%;
     display: block;
@@ -31,11 +34,22 @@ button {
 }
 
 main {
-   
+
     /* max-width: 1600px; */
     margin: 0 auto;
-    
+
 }
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+}
+
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -48,17 +62,9 @@ main {
     clip: rect(0 0 0 0);
     overflow: hidden;
 }
-body {
-    padding: 0;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    line-height: 1.5;     
-}
 
-/* heder ------------------------------------- */
+
+/*! heder ------------------------------------- */
 .logo {
     width: 80px;
     height: 40px;
@@ -69,20 +75,23 @@ body {
 .navigation-list {
     display: flex;
 }
+
 .navigation-item:not(:last-child) {
     margin-right: 20px;
 }
+
 .navigation-link {
     padding: 20px 10px;
     display: block;
 }
+
 .navigation-link.activ {
-    background-color: rgba(87, 87, 87,0.4);
+    background-color: rgba(87, 87, 87, 0.4);
     color: rgb(255, 255, 255);
 }
 
 .heder {
-background-color: #bdbdbd;
+    background-color: #bdbdbd;
 }
 
 .heder-container {
@@ -91,22 +100,25 @@ background-color: #bdbdbd;
     max-width: 2120px;
     margin: 0 auto;
     padding: 0px 60px;
-  
+
 }
 
 .options-list {
     display: flex;
 }
+
 .options {
-margin-left: 100px;
+    margin-left: 100px;
 }
+
 .options-item:first-child {
     margin-right: 10px;
 }
+
 /* huhdhocod-------------------------------- */
 
 body.light-theme {
-background-color: rgb(235, 235, 235);
+    background-color: rgb(235, 235, 235);
     color: #212121;
 }
 
@@ -114,6 +126,7 @@ body.dark-theme {
     background-color: #333333;
     color: #fff;
 }
+
 .footer-container.dark-theme a {
     color: #fff;
 }
@@ -140,6 +153,7 @@ body.dark-theme {
     border: 2px solid rgb(121, 120, 120);
     padding: 3px 0;
 }
+
 .switch--them {
     overflow: hidden
 }
@@ -152,7 +166,7 @@ body.dark-theme {
     height: 100%;
     color: transparent;
     user-select: none;
-    background-color:#a4a4a4;
+    background-color: #a4a4a4;
     border-radius: inherit;
     z-index: 1;
     cursor: pointer;
@@ -168,7 +182,7 @@ body.dark-theme {
     pointer-events: none;
     /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25); */
     transform: translateX(-14px);
-    transition: transform 250ms ;
+    transition: transform 250ms;
 }
 
 .theme-switch__toggle:checked+.theme-switch__track {
@@ -190,27 +204,30 @@ body.dark-theme {
 
 .lenguage-switch__marker {
     /* position: absolute; */
-width: 26px;
-height: 26px;
-border-radius: 50%;
-pointer-events: none;
-z-index: 3;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 3;
 }
+
 .language-switch__toggle:checked~.languages-list {
     transform: translateY(45px);
 }
 
 .lenguage-switch__marker--en {
-background-position: 50% 50%;
-background-image: url(/en.308b3912.png);
-background-size: cover;
+    background-position: 50% 50%;
+    background-image: url(/en.308b3912.png);
+    background-size: cover;
 }
+
 .lenguage-switch__marker--pl {
 
     background-position: 50% 50%;
     background-image: url(/pl.76d46dd7.png);
     background-size: cover;
 }
+
 .lenguage-switch__marker--ru {
     background-position: 50% 50%;
     background-image: url(/ru.9148cb47.png);
@@ -229,16 +246,17 @@ background-size: cover;
     border-radius: inherit;
     z-index: 1;
     cursor: pointer;
-  
+
 }
 
 .languages-list {
     display: flex;
-   position: relative;
-   bottom:45px;
-   right: 90px;
+    position: relative;
+    bottom: 45px;
+    right: 90px;
     transition: transform linear 250ms;
 }
+
 .languages-list-item:not(:last-child) {
     margin-right: 3px;
 }
@@ -251,17 +269,19 @@ background-size: cover;
     display: flex;
     margin: 0 auto;
 }
+
 .sf-btn {
 
     width: 200px;
     padding: 10px 0px;
 
 }
+
 .form-wrapper {
 
 
     background-color: rgb(152, 152, 255);
-    padding:  80px 20px;
+    padding: 80px 20px;
     background-image: url(/base-bk.651eca7a.jpg);
     /* background-size: cover; */
     opacity: 0.8;
@@ -270,7 +290,7 @@ background-size: cover;
 .search-form {
     margin: 0 auto;
     padding: 15px;
-   /* min-width: 300px; */
+    /* min-width: 300px; */
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 5px;
 }
@@ -286,9 +306,11 @@ background-size: cover;
     margin-bottom: 10px;
 
 }
+
 .form-input::placeholder {
     font-size: 18px;
 }
+
 .submit-btn {
     display: block;
     font-size: 25px;
@@ -297,19 +319,21 @@ background-size: cover;
 }
 
 @media (min-width: 600px) {
-.search-form {
+    .search-form {
         display: flex;
         justify-content: center;
         max-width: 450px;
     }
-        .form-input {
-            /* min-width: 300px; */
-    margin-right: 20px;
-    margin-bottom: 0px;
-        }
-   .form-wrapper {
-    padding: 80px;
-   }
+
+    .form-input {
+        /* min-width: 300px; */
+        margin-right: 20px;
+        margin-bottom: 0px;
+    }
+
+    .form-wrapper {
+        padding: 80px;
+    }
 }
 
 .gallery {
@@ -317,32 +341,40 @@ background-size: cover;
     display: flex;
     flex-wrap: wrap;
     /* align-items: center; */
-    justify-content: space-around;
+    /* justify-content: space-around; */
 }
+
 .info {
-    background-color:rgb(224, 224, 224);
-   font-size: 10px;
+    background-color: rgb(102, 102, 102, 0.6);
+    font-size: 10px;
     display: flex;
-    justify-content: space-around;
+    padding: 5px;
+    height: 30px;
+    width: 100%;
+    /* justify-content: space-around; */
 }
 
 .info-item {
-color: rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, 0.4);
 }
+
 .photo-card {
-    height: 300px;
+    height: 270px;
     max-width: 400px;
     /* border: 2px solid rgb(126, 126, 126); */
-    border-radius: 5px; 
-    margin-bottom: 20px;
-    overflow: hidden
+    border-radius: 5px;
+    /* margin-bottom: 20px; */
+    overflow: hidden;
+    position: relative;
 }
 
 
 .photo-card img {
-    width: 400px; 
+    width: 400px;
+    /* width: 400px; */
     height: 270px;
     object-fit: cover;
+
 }
 
 .gallery-container {
@@ -367,8 +399,9 @@ color: rgba(0, 0, 0, 0.4);
 
 /* footer===================== */
 footer {
-background-color: #bdbdbd;
+    background-color: #bdbdbd;
 }
+
 .footer-container {
     max-width: 2120px;
     padding: 20px 40px;
@@ -376,18 +409,82 @@ background-color: #bdbdbd;
     display: flex;
     justify-content: space-between;
 }
+
 .contacts-list {
     display: flex;
 }
+
 .contacts-link:not(:last-child) {
     margin-right: 10px;
 }
+
 .date {
     color: #000000;
     font-size: 13px;
     text-align: center;
-        margin: 0 auto;
+    margin: 0 auto;
     background-color: #6e6e6e;
+}
+
+/*!sasha*/
+
+
+.gallery {
+    justify-content: center;
+
+}
+
+.info {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(30px);
+    /* opacity: 0; */
+
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.photo-card:hover .info {
+    transform: translateY(0);
+    /* opacity: 1; */
+
+}
+
+
+@media screen and (max-width:899px) {
+    .gallery {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .photo-card:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (min-width:900px) {
+    .photo-card {
+        width: calc((100%-40px)/2);
+        margin: 10px;
+    }
+
+    .gallery {
+        margin: -10px;
+    }
+
+
+
+}
+
+@media screen and (min-width:1300px) {
+    .photo-card {
+        width: calc((100%-40px)/3);
+    }
+}
+
+@media screen and (min-width:1640px) {
+    .photo-card {
+        width: calc((100%-40px)/4);
+    }
 }
 /*!
 	By André Rinas, www.andrerinas.de

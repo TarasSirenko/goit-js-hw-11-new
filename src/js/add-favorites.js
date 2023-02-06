@@ -1,23 +1,63 @@
 import imgCardMarcup from '../hbs/imgCardMarcup.hbs';
 export { favoritesCardArr };
 import { Refs } from './refs.js';
+import { lightboxGallery } from './utils/light-box.js';
+import { searchParams, BASE_URL } from './fetch-params.js';
+import {
+  getCurrentLanguage,
+  updateCurrentLanguage,
+} from './utils/for-language.js';
+
+// ================================================
+let currentLanguage = getCurrentLanguage();
+
+// проверка localStorage на информацию о избранных обектих
 
 let favoritesCardArr = [];
+
+if (localStorage.getItem('favoritesCard')) {
+  favoritesCardArr = JSON.parse(localStorage.getItem('favoritesCard'));
+}
+// ===============================
 
 // Переход на страницу с избранным ===============================
 
 Refs.favoritesBtn.addEventListener('click', onFavoritesBtnClick);
 
-function onFavoritesBtnClick(event) {
+async function onFavoritesBtnClick(event) {
   event.preventDefault();
-  const cardsMarkup = createMarcup();
+  currentLanguage = updateCurrentLanguage(currentLanguage);
+  const response = await fetchFavoritesCards(favoritesCardArr);
+  const cards = await parseResponse(response);
+  const cardsMarkup = createMarcup(cards);
   renderCard(cardsMarkup);
+  lightboxGallery.refresh();
   hideElem(Refs.loadMoreButton);
   changeActivePage(event);
+
+  console.log();
 }
 
-function createMarcup() {
-  return imgCardMarcup(favoritesCardArr);
+function fetchFavoritesCards(favoritesIdArr) {
+  return favoritesIdArr.map(async ({ id }) => {
+    const response = await fetch(
+      `${BASE_URL}?id=${id}&lang=${currentLanguage.code}&${searchParams}`
+    );
+    return response.json();
+  });
+}
+
+async function parseResponse(response) {
+  const fetchInfo = await Promise.all(response);
+  const cards = await fetchInfo.map(e => {
+    e.hits[0].check = 'checked';
+    return e.hits[0];
+  });
+  return cards;
+}
+
+function createMarcup(cards) {
+  return imgCardMarcup(cards);
 }
 function renderCard(marcup) {
   Refs.gallery.innerHTML = marcup;
@@ -28,13 +68,6 @@ function hideElem(elem) {
 function changeActivePage(event) {
   event.target.classList.add('activ');
   Refs.homeBtn.classList.remove('activ');
-}
-// ===============================
-
-// проверка localStorage на информацию о избранных обектих
-
-if (localStorage.getItem('favoritesCard')) {
-  favoritesCardArr = JSON.parse(localStorage.getItem('favoritesCard'));
 }
 // ===============================
 
@@ -49,7 +82,6 @@ function onAddFavoritesBtnClick(event) {
     const cardToBeRemoved = getCardById(favoritesCardArr, id);
     const updatedArr = removeCard(favoritesCardArr, cardToBeRemoved);
     updateLocalStorage(updatedArr);
-
     return;
   }
   const newCard = createObjCard(event);
@@ -60,22 +92,8 @@ function onAddFavoritesBtnClick(event) {
 function createObjCard(event) {
   const currentCard = event.target.closest('.photo-card');
   const id = currentCard.dataset.id;
-  const largeImageURL = currentCard.querySelector('.card-link').href;
-  const webformatURL = currentCard.querySelector('.card-img').src;
-  const tags = currentCard.querySelector('.card-img').alt;
-  const likes = currentCard.querySelector('.likes').outerText;
-  const views = currentCard.querySelector('.views').outerText;
-  const comments = currentCard.querySelector('.comments').outerText;
-  const downloads = currentCard.querySelector('.downloads').outerText;
   return {
     id,
-    largeImageURL,
-    webformatURL,
-    tags,
-    likes,
-    views,
-    comments,
-    downloads,
     check: 'checked',
   };
 }

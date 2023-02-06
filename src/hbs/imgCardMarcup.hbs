@@ -8,23 +8,34 @@
         <p class="info-item">
             <b>{{this.tags}}</b>
         </p>
-        <button class="add-favorites"> добавить в избранное </button>
-<label aria-hidden="true" class="label-add-favorites ">
-                    <input class="add-favorites" type="checkbox" 
-                        aria-label="добавление в избранное" {{this.check}}/> 
-                    </label>
+        
+        <label aria-hidden="true" class="label-add-favorites ">
+                <input class="add-favorites" type="checkbox" 
+                aria-label="добавление в избранное" {{this.check}}/> 
+        </label>
+        
         <p class="info-item">
-            <b class="likes">L: {{this.likes}}</b>
+            <b class="likes"><svg class="theme-switch__icon" role="img" aria-label="Иконка солнца">
+                <use href="/sprite.dc9ae70e.svg#icon-likes"></use>
+            </svg>{{this.likes}}</b>
         </p>
         <p class="info-item">
-            <b class="views">V: {{this.views}}</b>
+            <b class="views"><svg class="theme-switch__icon" role="img" aria-label="Иконка солнца">
+                <use href="/sprite.dc9ae70e.svg#icon-views"></use>
+            </svg>{{this.views}}</b>
         </p>
         <p class="info-item">
-            <b class="comments">C: {{this.comments}}</b>
+            <b class="comments"><svg class="theme-switch__icon" role="img" aria-label="Иконка солнца">
+                <use href="/sprite.dc9ae70e.svg#icon-comments"></use>
+            </svg> {{this.comments}}</b>
         </p>
         <p class="info-item">
-            <b class="downloads">D: {{this.downloads}}</b>
+            <b class="downloads">
+            <svg class="theme-switch__icon" role="img" aria-label="Иконка солнца">
+                <use href="/sprite.dc9ae70e.svg#icon-download"></use>
+            </svg> {{this.downloads}}</b>
         </p>
+            
     </div>
 </div>
 
