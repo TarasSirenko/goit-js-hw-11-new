@@ -20,7 +20,7 @@ let currentLanguage = getCurrentLanguage();
 // проверка localStorage на информацию о избранных обектих
 
 let favoritesCardArr = [];
-// localStorage.removeItem('favoritesCard');
+localStorage.removeItem('favoritesCard');
 if (localStorage.getItem('favoritesCard')) {
   favoritesCardArr = JSON.parse(localStorage.getItem('favoritesCard'));
 }
