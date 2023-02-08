@@ -200,7 +200,9 @@ const Refs = {
   footer: document.querySelector('.footer-container'),
   languageSwitch: document.querySelector('.language-switch__toggle'),
   languagesList: document.querySelector('.languages-list'),
-  currentLanguage: document.querySelector('.language-switch__track')
+  currentLanguage: document.querySelector('.language-switch__track'),
+  picturesBtn: document.querySelector('.lang-picturesBtn'),
+  videoBtn: document.querySelector('.lang-videoBtn')
 };
 exports.Refs = Refs;
 },{}],"js/change-theme.js":[function(require,module,exports) {
@@ -217,6 +219,8 @@ try {
     _refs.Refs.body.classList.toggle(Theme.DARK);
     _refs.Refs.body.classList.toggle(Theme.LIGHT);
     _refs.Refs.footer.classList.toggle(Theme.DARK);
+    _refs.Refs.favoritesBtn.classList.toggle(Theme.DARK);
+    _refs.Refs.homeBtn.classList.toggle(Theme.DARK);
     _refs.Refs.checkbox.checked = true;
   }
 } catch {}
@@ -225,35 +229,32 @@ function onCheckboxChange() {
   _refs.Refs.body.classList.toggle(Theme.DARK);
   _refs.Refs.body.classList.toggle(Theme.LIGHT);
   _refs.Refs.footer.classList.toggle(Theme.DARK);
+  _refs.Refs.favoritesBtn.classList.toggle(Theme.DARK);
+  _refs.Refs.homeBtn.classList.toggle(Theme.DARK);
   _refs.Refs.checkbox.checked ? currentTheme = Theme.DARK : currentTheme = Theme.LIGHT;
   localStorage.setItem('currentTheme', currentTheme);
 }
 },{"./refs.js":"js/refs.js"}],"language.json":[function(require,module,exports) {
 module.exports = {
   "home": {
-    "en": "Home",
+    "en": "HOME",
     "pl": "Dom",
     "ru": "Домой"
   },
   "favorites": {
-    "en": "Favorites",
+    "en": "FAVORITES",
     "pl": "Ulubione",
     "ru": "Избранное"
   },
   "picturesBtn": {
-    "en": "Pictures",
-    "pl": "Kino",
+    "en": "PICTURES",
+    "pl": "Obrazy",
     "ru": "Картинки"
   },
   "videoBtn": {
-    "en": "Video",
+    "en": "VIDEO",
     "pl": "Wideo",
     "ru": "Видео"
-  },
-  "audioBtn": {
-    "en": "Audio",
-    "pl": "Audio",
-    "ru": "Аудио"
   },
   "searchBtn": {
     "en": "Search",
@@ -1971,7 +1972,7 @@ const templateFunction = _handlebars.default.template({
         }
         return undefined;
       };
-    return "\r\n<div class=\"photo-card\" data-id = " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "id") : depth0, depth0)) + ">\r\n    <a class=\"card-link\" href=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "largeImageURL") : depth0, depth0)) + "\">\r\n        <img src=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "webformatURL") : depth0, depth0)) + "\" alt=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "\" loading=\"lazy\"  class=\"card-img\"/>\r\n    </a>\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "</b>\r\n        </p>\r\n        \r\n        <label aria-hidden=\"true\" class=\"label-add-favorites \">\r\n                <input class=\"add-favorites\" type=\"checkbox\" \r\n                aria-label=\"добавление в избранное\" " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "check") : depth0, depth0)) + "/> \r\n        </label>\r\n        \r\n        <p class=\"info-item\">\r\n            <b class=\"likes\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                <use href=\"/sprite.dc9ae70e.svg#icon-likes\"></use>\r\n            </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"views\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                <use href=\"/sprite.dc9ae70e.svg#icon-views\"></use>\r\n            </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"comments\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                <use href=\"/sprite.dc9ae70e.svg#icon-comments\"></use>\r\n            </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"downloads\">\r\n            <svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                <use href=\"/sprite.dc9ae70e.svg#icon-download\"></use>\r\n            </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n        </p>\r\n            \r\n    </div>\r\n</div>\r\n\r\n";
+    return "\r\n<div class=\"photo-card\" data-id=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "id") : depth0, depth0)) + " data-type=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "type") : depth0, depth0)) + ">\r\n    <a class=\"card-link\" href=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "largeImageURL") : depth0, depth0)) + "\">\r\n        <img src=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "webformatURL") : depth0, depth0)) + "\" alt=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "\" loading=\"lazy\" class=\"card-img\" />\r\n    </a>\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n        <label aria-hidden=\"true\" class=\"label-add-favorites \">\r\n            <input class=\"add-favorites\" type=\"checkbox\" aria-label=\"добавление в избранное\" " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "check") : depth0, depth0)) + " />\r\n            <svg class=\"theme-switch__icon custom-checkbox\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                <use href=\"/sprite.dc9ae70e.svg#icon-star\"></use>\r\n            </svg>\r\n        </label>\r\n        <div class=\"info-wrapper\">\r\n            <p class=\"info-item\">\r\n                <b class=\"likes info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.dc9ae70e.svg#icon-likes\"></use>\r\n                    </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"views info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.dc9ae70e.svg#icon-views\"></use>\r\n                    </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"comments info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.dc9ae70e.svg#icon-comments\"></use>\r\n                    </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"downloads info-item--element\">\r\n                    <svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.dc9ae70e.svg#icon-download\"></use>\r\n                    </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n            </p>\r\n        </div>\r\n\r\n    </div>\r\n</div>\r\n\r\n";
   },
   "compiler": [8, ">= 4.3.0"],
   "main": function (container, depth0, helpers, partials, data) {
@@ -1994,7 +1995,60 @@ const templateFunction = _handlebars.default.template({
           "column": 0
         },
         "end": {
-          "line": 42,
+          "line": 48,
+          "column": 9
+        }
+      }
+    })) != null ? stack1 : "";
+  },
+  "useData": true
+});
+var _default = templateFunction;
+exports.default = _default;
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"hbs/videoCardMarcup.hbs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+const templateFunction = _handlebars.default.template({
+  "1": function (container, depth0, helpers, partials, data) {
+    var stack1,
+      alias1 = container.lambda,
+      alias2 = container.escapeExpression,
+      lookupProperty = container.lookupProperty || function (parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined;
+      };
+    return "<div class=\"photo-card video\" data-id=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "id") : depth0, depth0)) + " data-type=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "type") : depth0, depth0)) + ">\r\n    <video id=\"my-player\" class=\"video-js vjs-theme-city\" controls preload=\"auto\" poster=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "picture_id") : depth0, depth0)) + "\" >\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/mp4\">\r\n        </source>\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/webm\">\r\n        </source>\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/ogg\">\r\n        </source>\r\n        <p class=\"vjs-no-js\">\r\n            To view this video please enable JavaScript, and consider upgrading to a\r\n            web browser that\r\n            <a href=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" target=\"_blank\">\r\n                supports HTML5 video\r\n            </a>\r\n        </p>\r\n    </video>\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n        <label aria-hidden=\"true\" class=\"label-add-favorites \">\r\n            <input class=\"add-favorites\" type=\"checkbox\" aria-label=\"добавление в избранное\" " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "check") : depth0, depth0)) + " />\r\n        </label>\r\n\r\n        <p class=\"info-item\">\r\n            <b class=\"likes\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"/sprite.dc9ae70e.svg#icon-likes\"></use>\r\n                </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"views\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"/sprite.dc9ae70e.svg#icon-views\"></use>\r\n                </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"comments\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"/sprite.dc9ae70e.svg#icon-comments\"></use>\r\n                </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"downloads\">\r\n                <svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"/sprite.dc9ae70e.svg#icon-download\"></use>\r\n                </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n    </div>\r\n</div>\r\n\r\n";
+  },
+  "compiler": [8, ">= 4.3.0"],
+  "main": function (container, depth0, helpers, partials, data) {
+    var stack1,
+      lookupProperty = container.lookupProperty || function (parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined;
+      };
+    return (stack1 = lookupProperty(helpers, "each").call(depth0 != null ? depth0 : container.nullContext || {}, depth0, {
+      "name": "each",
+      "hash": {},
+      "fn": container.program(1, data, 0),
+      "inverse": container.noop,
+      "data": data,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 52,
           "column": 9
         }
       }
@@ -3587,10 +3641,9 @@ exports.lightboxGallery = lightboxGallery;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.searchParams = exports.BASE_URL = void 0;
+exports.searchParams = exports.previewSize = exports.BASE_URL_VIDEO_PREVIEW = exports.BASE_URL = void 0;
 const searchParams = new URLSearchParams({
   key: '33110097-e31e2273406f912ac77c7c325',
-  image_type: 'photo',
   orientation: 'horizontal',
   safesearch: 'true',
   per_page: 30
@@ -3598,6 +3651,10 @@ const searchParams = new URLSearchParams({
 exports.searchParams = searchParams;
 const BASE_URL = 'https://pixabay.com/api/';
 exports.BASE_URL = BASE_URL;
+const BASE_URL_VIDEO_PREVIEW = 'https://i.vimeocdn.com/video/';
+exports.BASE_URL_VIDEO_PREVIEW = BASE_URL_VIDEO_PREVIEW;
+const previewSize = '640x360';
+exports.previewSize = previewSize;
 },{}],"js/utils/for-language.js":[function(require,module,exports) {
 "use strict";
 
@@ -3626,6 +3683,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.favoritesCardArr = void 0;
 var _imgCardMarcup = _interopRequireDefault(require("../hbs/imgCardMarcup.hbs"));
+var _videoCardMarcup = _interopRequireDefault(require("../hbs/videoCardMarcup.hbs"));
 var _refs = require("./refs.js");
 var _lightBox = require("./utils/light-box.js");
 var _fetchParams = require("./fetch-params.js");
@@ -3637,46 +3695,65 @@ let currentLanguage = (0, _forLanguage.getCurrentLanguage)();
 // проверка localStorage на информацию о избранных обектих
 
 let favoritesCardArr = [];
+// localStorage.removeItem('favoritesCard');
 exports.favoritesCardArr = favoritesCardArr;
 if (localStorage.getItem('favoritesCard')) {
   exports.favoritesCardArr = favoritesCardArr = JSON.parse(localStorage.getItem('favoritesCard'));
 }
+
 // ===============================
 
 // Переход на страницу с избранным ===============================
 
 _refs.Refs.favoritesBtn.addEventListener('click', onFavoritesBtnClick);
-async function onFavoritesBtnClick(event) {
+function onFavoritesBtnClick(event) {
   event.preventDefault();
   currentLanguage = (0, _forLanguage.updateCurrentLanguage)(currentLanguage);
-  const response = await fetchFavoritesCards(favoritesCardArr);
-  const cards = await parseResponse(response);
-  const cardsMarkup = createMarcup(cards);
-  renderCard(cardsMarkup);
+  cardRequest(favoritesCardArr);
   _lightBox.lightboxGallery.refresh();
   hideElem(_refs.Refs.loadMoreButton);
   changeActivePage(event);
-  console.log();
+}
+async function cardRequest(favoritesCards) {
+  const response = await fetchFavoritesCards(favoritesCards);
+  const cards = await parseResponse(response);
+  const cardsMarkup = createMarcup(cards);
+  renderCard(cardsMarkup);
 }
 function fetchFavoritesCards(favoritesIdArr) {
   return favoritesIdArr.map(async _ref => {
     let {
-      id
+      id,
+      type
     } = _ref;
-    const response = await fetch(`${_fetchParams.BASE_URL}?id=${id}&lang=${currentLanguage.code}&${_fetchParams.searchParams}`);
+    let response;
+    if (type === 'photo') {
+      response = await fetch(`${_fetchParams.BASE_URL}?id=${id}&lang=${currentLanguage.code}&${_fetchParams.searchParams}`);
+    }
+    if (type === 'film') {
+      response = await fetch(`${_fetchParams.BASE_URL}videos?id=${id}&lang=${currentLanguage.code}&${_fetchParams.searchParams}`);
+    }
     return response.json();
   });
 }
 async function parseResponse(response) {
   const fetchInfo = await Promise.all(response);
   const cards = await fetchInfo.map(e => {
+    if (e.hits[0].type === 'film') {
+      e.hits[0].picture_id = `${_fetchParams.BASE_URL_VIDEO_PREVIEW}${e.hits[0].picture_id}_${_fetchParams.previewSize}.jpg`;
+    }
     e.hits[0].check = 'checked';
     return e.hits[0];
   });
   return cards;
 }
 function createMarcup(cards) {
-  return (0, _imgCardMarcup.default)(cards);
+  // console.log(cards);
+
+  const photoCards = (0, _imgCardMarcup.default)(cards.filter(card => card.type === 'photo'));
+  const videoCards = (0, _videoCardMarcup.default)(cards.filter(card => card.type === 'film'));
+  const marcup = photoCards + videoCards;
+  return marcup;
 }
 function renderCard(marcup) {
   _refs.Refs.gallery.innerHTML = marcup;
@@ -3704,14 +3781,17 @@ function onAddFavoritesBtnClick(event) {
   }
   const newCard = createObjCard(event);
   const updatedArr = addCardInFavorites(favoritesCardArr, newCard);
+  console.log(updatedArr);
   updateLocalStorage(updatedArr);
 }
 function createObjCard(event) {
   const currentCard = event.target.closest('.photo-card');
   const id = currentCard.dataset.id;
+  const type = currentCard.dataset.type;
   return {
     id,
-    check: 'checked'
+    check: 'checked',
+    type
   };
 }
 function getCardById(arr, id) {
@@ -3741,7 +3821,21 @@ function updateLocalStorage(arr) {
 //   newElement.id = newId;
 //   return newElement;
 // }
-},{"../hbs/imgCardMarcup.hbs":"hbs/imgCardMarcup.hbs","./refs.js":"js/refs.js","./utils/light-box.js":"js/utils/light-box.js","./fetch-params.js":"js/fetch-params.js","./utils/for-language.js":"js/utils/for-language.js"}],"../node_modules/notiflix/dist/notiflix-aio-3.2.6.min.js":[function(require,module,exports) {
+
+_refs.Refs.picturesBtn.addEventListener('click', onPicturesBtnClick);
+_refs.Refs.videoBtn.addEventListener('click', onVideoBtnClick);
+function onPicturesBtnClick() {
+  if (!_refs.Refs.favoritesBtn.classList.contains('activ')) return;
+  const imgFavorites = favoritesCardArr.filter(card => card.type === 'photo');
+  cardRequest(imgFavorites);
+  _lightBox.lightboxGallery.refresh();
+}
+function onVideoBtnClick() {
+  if (!_refs.Refs.favoritesBtn.classList.contains('activ')) return;
+  const videoFavorites = favoritesCardArr.filter(card => card.type === 'film');
+  cardRequest(videoFavorites);
+}
+},{"../hbs/imgCardMarcup.hbs":"hbs/imgCardMarcup.hbs","../hbs/videoCardMarcup.hbs":"hbs/videoCardMarcup.hbs","./refs.js":"js/refs.js","./utils/light-box.js":"js/utils/light-box.js","./fetch-params.js":"js/fetch-params.js","./utils/for-language.js":"js/utils/for-language.js"}],"../node_modules/notiflix/dist/notiflix-aio-3.2.6.min.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /* Notiflix AIO (https://notiflix.github.io) - Version: 3.2.6 - Author: Furkan (https://github.com/furcan) - Copyright 2019 - 2023 Notiflix, MIT Licence (https://opensource.org/licenses/MIT) */
@@ -4134,6 +4228,7 @@ var _fetchParams = require("./fetch-params.js");
 var _notiflix = _interopRequireDefault(require("notiflix"));
 var _lightBox = require("./utils/light-box.js");
 var _refs = require("./refs.js");
+var _videoCardMarcup = _interopRequireDefault(require("../hbs/videoCardMarcup.hbs"));
 var _imgCardMarcup = _interopRequireDefault(require("../hbs/imgCardMarcup.hbs"));
 var _addFavorites = require("./add-favorites");
 var _forLanguage = require("./utils/for-language.js");
@@ -4153,17 +4248,24 @@ const DEBOUNCE_DELAY = 50;
 let requestUser = 'nature';
 let currentRequest = '';
 let currentPage = 1;
-let perPage = 30;
 let scroll = true;
 let currentLanguage = (0, _forLanguage.getCurrentLanguage)();
-
+let currentSearchType = 'img';
 // ----------------------------
 
 _refs.Refs.requestForm.addEventListener('submit', event => event.preventDefault());
 _refs.Refs.userInput.addEventListener('input', debounce(onUserInput, DEBOUNCE_DELAY));
 _refs.Refs.submitButton.addEventListener('click', onSubmitBtnClick);
 _refs.Refs.loadMoreButton.addEventListener('click', onLoadMoreBtnClick);
-fechImages();
+_refs.Refs.picturesBtn.addEventListener('click', onPicturesBtnClick);
+_refs.Refs.videoBtn.addEventListener('click', onVideoBtnClick);
+_refs.Refs.homeBtn.addEventListener('click', onHomeBtnClick);
+cardRequest(currentSearchType);
+// onUserInput ------------------------------------------------------------------------------
+function onUserInput(event) {
+  requestUser = event.target.value;
+}
+// onSubmitBtnClick ------------------------------------------------------------------------------
 function onSubmitBtnClick() {
   if (requestUser === currentRequest && !(requestUser === '') && JSON.stringify(currentLanguage) === localStorage.getItem('currentLanguage')) return;
   if (requestUser === '') {
@@ -4174,75 +4276,118 @@ function onSubmitBtnClick() {
   }
   currentPage = 1;
   clearPage();
-  fechImages().then(searchResultMessage);
-}
-function searchResultMessage(obj) {
-  _notiflix.default.Notify.info(`Hooray! We found ${obj.totalHits} images.`, {
-    background: '#808080'
-  });
+  cardRequest(currentSearchType);
 }
 function clearPage() {
   _refs.Refs.gallery.innerHTML = '';
   _refs.Refs.loadMoreButton.classList.add('visually-hidden');
 }
-function fechImages() {
+async function cardRequest(type) {
+  const responseObj = await fetchCard(type);
+  const isValidRequest = await responseCheck(responseObj);
+  if (!isValidRequest) return;
+  const cardsArr = await preparingObjForMarkup(responseObj, type);
+  await showLoadMoreBtn();
+  await renderCards(cardsArr, type);
+  await scrollPage(currentPage, scroll);
+  await whenQueryResultsEnd(currentPage, responseObj);
+}
+async function fetchCard(type) {
   currentLanguage = (0, _forLanguage.updateCurrentLanguage)();
-  return fetch(`${_fetchParams.BASE_URL}?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&${_fetchParams.searchParams}`).then(response => response.json()).then(obj => {
-    obj.hits.length === 0 ? onIncorectRequest() : onCorectRequest(obj);
-    // console.log(obj);
-    return obj;
-  });
-}
-function onUserInput(event) {
-  requestUser = event.target.value;
-}
-function onLoadMoreBtnClick() {
-  scroll = true;
-  currentPage += 1;
-  fechImages();
-}
-function onIncorectRequest() {
-  clearPage();
-  _notiflix.default.Notify.warning('Sorry, there are no images matching your search query. Please try again.');
-  return {};
-}
-function onCorectRequest(obj) {
-  const cards = militaryFavorites(obj, _addFavorites.favoritesCardArr);
-  renderCards(cards);
-  _refs.Refs.loadMoreButton.classList.remove('visually-hidden');
-  if (perPage * currentPage > obj.totalHits) whenQueryResultsEnd();
-  _lightBox.lightboxGallery.refresh();
   currentRequest = requestUser;
-  console.log(scroll);
+  const response = await requestFetch(type);
+  const objImgCards = await response.json();
+  return objImgCards;
+}
+function requestFetch(type) {
+  if (type === 'img') return fetch(`${_fetchParams.BASE_URL}?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&${_fetchParams.searchParams}`);
+  if (type === 'video') return fetch(`${_fetchParams.BASE_URL}videos?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&${_fetchParams.searchParams}`);
+}
+function responseCheck(response) {
+  if (response.totalHits === 0) {
+    clearPage();
+    _notiflix.default.Notify.warning('Sorry, there are no images matching your search query. Please try again.');
+    return false;
+  }
+  if (currentPage === 1) _notiflix.default.Notify.info(`Hooray! We found ${response.totalHits} images.`);
+  return true;
+}
+function preparingObjForMarkup(objImgCards, type) {
+  let cardArr = objImgCards.hits;
+  cardArr = markFavorites(cardArr, _addFavorites.favoritesCardArr);
+  if (type === 'video') {
+    cardArr = cardArr.map(vobj => {
+      vobj.picture_id = `${_fetchParams.BASE_URL_VIDEO_PREVIEW}${vobj.picture_id}_${_fetchParams.previewSize}.jpg`;
+      return vobj;
+    });
+    return cardArr;
+  }
+  return cardArr;
+}
+function markFavorites(arr, favorites) {
+  const idFavoritesArr = favorites.map(card => card.id);
+  const cardsArr = arr.map(card => {
+    if (idFavoritesArr.includes(String(card.id))) card.check = 'checked';
+    return card;
+  });
+  return cardsArr;
+}
+function renderCards(cards, type) {
+  if (type === 'video') {
+    _refs.Refs.gallery.insertAdjacentHTML('beforeend', (0, _videoCardMarcup.default)(cards));
+  }
+  if (type === 'img') {
+    _refs.Refs.gallery.insertAdjacentHTML('beforeend', (0, _imgCardMarcup.default)(cards));
+  }
+  _lightBox.lightboxGallery.refresh();
+}
+function showLoadMoreBtn() {
+  _refs.Refs.loadMoreButton.classList.remove('visually-hidden');
+}
+function scrollPage(currentPage, scroll) {
   if (currentPage > 1 && scroll) {
     setTimeout(() => {
       window.scrollBy({
-        top: window.innerHeight - 160,
+        top: window.innerHeight - 140,
         behavior: 'smooth'
       });
     }, 250);
   }
 }
-function whenQueryResultsEnd() {
-  _refs.Refs.loadMoreButton.classList.add('visually-hidden');
-  _notiflix.default.Notify.info('We`re sorry, but you`ve reached the end of search results.');
-}
-function renderCards(cards) {
-  _refs.Refs.gallery.insertAdjacentHTML('beforeend', (0, _imgCardMarcup.default)(cards));
-}
-function militaryFavorites(obj, favorites) {
-  const idFavoritesArr = favorites.map(card => card.id);
-  const favoritesCards = obj.hits.map(el => {
-    if (idFavoritesArr.includes(String(el.id))) {
-      el.check = 'checked';
-    }
-    return el;
-  });
-  return favoritesCards;
+function whenQueryResultsEnd(currentPage, obj) {
+  if (30 * currentPage > obj.totalHits) {
+    _refs.Refs.loadMoreButton.classList.add('visually-hidden');
+    _notiflix.default.Notify.info('We`re sorry, but you`ve reached the end of search results.');
+  }
 }
 
-// hom btn click
-_refs.Refs.homeBtn.addEventListener('click', onHomeBtnClick);
+// onLoadMoreBtnClick---------------------------------------------------------------------------------------------
+async function onLoadMoreBtnClick() {
+  scroll = true;
+  currentPage += 1;
+  cardRequest(currentSearchType);
+}
+
+// search filter-----------------------------------------------------------------------
+
+function onPicturesBtnClick(event) {
+  if (event.target.classList.contains('activ')) return;
+  event.target.classList.add('activ');
+  _refs.Refs.videoBtn.classList.remove('activ');
+  if (_refs.Refs.favoritesBtn.classList.contains('activ')) return;
+  currentSearchType = 'img';
+  currentRequest = '';
+}
+function onVideoBtnClick(event) {
+  if (event.target.classList.contains('activ')) return;
+  event.target.classList.add('activ');
+  _refs.Refs.picturesBtn.classList.remove('activ');
+  if (_refs.Refs.favoritesBtn.classList.contains('activ')) return;
+  currentSearchType = 'video';
+  currentRequest = '';
+}
+//  hom btn click ---------------------------------------------------------------------------------------------
+
 function onHomeBtnClick(event) {
   event.preventDefault();
   changeActivePage(event);
@@ -4250,11 +4395,11 @@ function onHomeBtnClick(event) {
 function changeActivePage(event) {
   scroll = false;
   clearPage();
-  fechImages();
+  cardRequest(currentSearchType);
   _refs.Refs.favoritesBtn.classList.remove('activ');
   event.target.classList.add('activ');
 }
-},{"./fetch-params.js":"js/fetch-params.js","notiflix":"../node_modules/notiflix/dist/notiflix-aio-3.2.6.min.js","./utils/light-box.js":"js/utils/light-box.js","./refs.js":"js/refs.js","../hbs/imgCardMarcup.hbs":"hbs/imgCardMarcup.hbs","./add-favorites":"js/add-favorites.js","./utils/for-language.js":"js/utils/for-language.js","lodash.debounce":"../node_modules/lodash.debounce/index.js"}],"js/index.js":[function(require,module,exports) {
+},{"./fetch-params.js":"js/fetch-params.js","notiflix":"../node_modules/notiflix/dist/notiflix-aio-3.2.6.min.js","./utils/light-box.js":"js/utils/light-box.js","./refs.js":"js/refs.js","../hbs/videoCardMarcup.hbs":"hbs/videoCardMarcup.hbs","../hbs/imgCardMarcup.hbs":"hbs/imgCardMarcup.hbs","./add-favorites":"js/add-favorites.js","./utils/for-language.js":"js/utils/for-language.js","lodash.debounce":"../node_modules/lodash.debounce/index.js"}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
 require("../css/styles.css");
@@ -4289,7 +4434,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "14895" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3072" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
