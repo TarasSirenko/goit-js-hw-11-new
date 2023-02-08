@@ -12,6 +12,8 @@ try {
     Refs.body.classList.toggle(Theme.DARK);
     Refs.body.classList.toggle(Theme.LIGHT);
     Refs.footer.classList.toggle(Theme.DARK);
+    Refs.favoritesBtn.classList.toggle(Theme.DARK);
+    Refs.homeBtn.classList.toggle(Theme.DARK);
     Refs.checkbox.checked = true;
   }
 } catch {}
@@ -22,6 +24,8 @@ function onCheckboxChange() {
   Refs.body.classList.toggle(Theme.DARK);
   Refs.body.classList.toggle(Theme.LIGHT);
   Refs.footer.classList.toggle(Theme.DARK);
+  Refs.favoritesBtn.classList.toggle(Theme.DARK);
+  Refs.homeBtn.classList.toggle(Theme.DARK);
   Refs.checkbox.checked
     ? (currentTheme = Theme.DARK)
     : (currentTheme = Theme.LIGHT);

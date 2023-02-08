@@ -15,4 +15,6 @@ const Refs = {
   languageSwitch: document.querySelector('.language-switch__toggle'),
   languagesList: document.querySelector('.languages-list'),
   currentLanguage: document.querySelector('.language-switch__track'),
+  picturesBtn: document.querySelector('.lang-picturesBtn'),
+  videoBtn: document.querySelector('.lang-videoBtn'),
 };

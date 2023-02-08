@@ -4,11 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+  href="https://unpkg.com/@videojs/themes@1/dist/city/index.css"
+  rel="stylesheet"
+/>
     <title>Document</title>
   </head>
   <body class="light-theme">
-    <main>
-      <header class="heder">
+    <header class="heder">
         <div class="heder-container">
           <div class="logo">
             <a href="" class="logo-link"></a>
@@ -75,10 +78,12 @@
           </div>
         </div>
       </header>
+    <main>
+      
       <div class="search-filter">
-        <button class="sf-btn lang-picturesBtn">Pictures</button
+        <button class="sf-btn lang-picturesBtn activ">Pictures</button
         ><button class="sf-btn lang-videoBtn">Video</button
-        ><button class="sf-btn lang-audioBtn">Audio</button>
+        >
       </div>
       <div class="form-wrapper">
         <form class="search-form" id="search-form">
@@ -94,14 +99,17 @@
       </div>
       <section class="gallery-container">
         <div class="gallery">
+
           <!-- Карточки изображений -->
         </div>
-        <button type="button" class="load-more visually-hidden lang-loadMoreBtn">
+        <button type="button" class="load-more visually-hidden lang-loadMoreBtn ">
           Load more
         </button>
       </section>
 
-      <footer>
+     
+    </main>
+     <footer>
         <div class="footer-container">
           <!-- <address></address> -->
        
@@ -121,7 +129,6 @@
         </div>
          <p class="date">2023@</p>
       </footer>
-    </main>
 
     <script src="./js/index.js"></script>
   </body>

@@ -1,8 +1,14 @@
 import imgCardMarcup from '../hbs/imgCardMarcup.hbs';
+import videoCardMarcup from '../hbs/videoCardMarcup.hbs';
 export { favoritesCardArr };
 import { Refs } from './refs.js';
 import { lightboxGallery } from './utils/light-box.js';
-import { searchParams, BASE_URL } from './fetch-params.js';
+import {
+  searchParams,
+  BASE_URL,
+  BASE_URL_VIDEO_PREVIEW,
+  previewSize,
+} from './fetch-params.js';
 import {
   getCurrentLanguage,
   updateCurrentLanguage,
@@ -14,42 +20,58 @@ let currentLanguage = getCurrentLanguage();
 // проверка localStorage на информацию о избранных обектих
 
 let favoritesCardArr = [];
-
+// localStorage.removeItem('favoritesCard');
 if (localStorage.getItem('favoritesCard')) {
   favoritesCardArr = JSON.parse(localStorage.getItem('favoritesCard'));
 }
+
 // ===============================
 
 // Переход на страницу с избранным ===============================
 
 Refs.favoritesBtn.addEventListener('click', onFavoritesBtnClick);
 
-async function onFavoritesBtnClick(event) {
+function onFavoritesBtnClick(event) {
   event.preventDefault();
   currentLanguage = updateCurrentLanguage(currentLanguage);
-  const response = await fetchFavoritesCards(favoritesCardArr);
-  const cards = await parseResponse(response);
-  const cardsMarkup = createMarcup(cards);
-  renderCard(cardsMarkup);
+  cardRequest(favoritesCardArr);
   lightboxGallery.refresh();
   hideElem(Refs.loadMoreButton);
   changeActivePage(event);
-
-  console.log();
 }
 
+async function cardRequest(favoritesCards) {
+  const response = await fetchFavoritesCards(favoritesCards);
+  const cards = await parseResponse(response);
+  const cardsMarkup = createMarcup(cards);
+  renderCard(cardsMarkup);
+}
 function fetchFavoritesCards(favoritesIdArr) {
-  return favoritesIdArr.map(async ({ id }) => {
-    const response = await fetch(
-      `${BASE_URL}?id=${id}&lang=${currentLanguage.code}&${searchParams}`
-    );
+  return favoritesIdArr.map(async ({ id, type }) => {
+    let response;
+    if (type === 'photo') {
+      response = await fetch(
+        `${BASE_URL}?id=${id}&lang=${currentLanguage.code}&${searchParams}`
+      );
+    }
+
+    if (type === 'film') {
+      response = await fetch(
+        `${BASE_URL}videos?id=${id}&lang=${currentLanguage.code}&${searchParams}`
+      );
+    }
+
     return response.json();
   });
 }
 
 async function parseResponse(response) {
   const fetchInfo = await Promise.all(response);
+
   const cards = await fetchInfo.map(e => {
+    if (e.hits[0].type === 'film') {
+      e.hits[0].picture_id = `${BASE_URL_VIDEO_PREVIEW}${e.hits[0].picture_id}_${previewSize}.jpg`;
+    }
     e.hits[0].check = 'checked';
     return e.hits[0];
   });
@@ -57,7 +79,14 @@ async function parseResponse(response) {
 }
 
 function createMarcup(cards) {
-  return imgCardMarcup(cards);
+  // console.log(cards);
+
+  const photoCards = imgCardMarcup(cards.filter(card => card.type === 'photo'));
+  const videoCards = videoCardMarcup(
+    cards.filter(card => card.type === 'film')
+  );
+  const marcup = photoCards + videoCards;
+  return marcup;
 }
 function renderCard(marcup) {
   Refs.gallery.innerHTML = marcup;
@@ -86,15 +115,19 @@ function onAddFavoritesBtnClick(event) {
   }
   const newCard = createObjCard(event);
   const updatedArr = addCardInFavorites(favoritesCardArr, newCard);
+  console.log(updatedArr);
+
   updateLocalStorage(updatedArr);
 }
 
 function createObjCard(event) {
   const currentCard = event.target.closest('.photo-card');
   const id = currentCard.dataset.id;
+  const type = currentCard.dataset.type;
   return {
     id,
     check: 'checked',
+    type,
   };
 }
 
@@ -127,3 +160,18 @@ function updateLocalStorage(arr) {
 //   newElement.id = newId;
 //   return newElement;
 // }
+
+Refs.picturesBtn.addEventListener('click', onPicturesBtnClick);
+Refs.videoBtn.addEventListener('click', onVideoBtnClick);
+
+function onPicturesBtnClick() {
+  if (!Refs.favoritesBtn.classList.contains('activ')) return;
+  const imgFavorites = favoritesCardArr.filter(card => card.type === 'photo');
+  cardRequest(imgFavorites);
+  lightboxGallery.refresh();
+}
+function onVideoBtnClick() {
+  if (!Refs.favoritesBtn.classList.contains('activ')) return;
+  const videoFavorites = favoritesCardArr.filter(card => card.type === 'film');
+  cardRequest(videoFavorites);
+}

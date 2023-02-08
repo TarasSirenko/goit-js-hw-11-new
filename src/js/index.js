@@ -1,4 +1,5 @@
 import '../css/styles.css';
+
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import './change-theme.js';
 import './change-language.js';
