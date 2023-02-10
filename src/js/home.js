@@ -40,6 +40,7 @@ let scroll = true;
 
 let currentLanguage = getCurrentLanguage();
 let currentSearchType = 'img';
+let currentImgType = '';
 // ----------------------------
 
 Refs.requestForm.addEventListener('submit', event => event.preventDefault());
@@ -49,6 +50,8 @@ Refs.loadMoreButton.addEventListener('click', onLoadMoreBtnClick);
 Refs.picturesBtn.addEventListener('click', onPicturesBtnClick);
 Refs.videoBtn.addEventListener('click', onVideoBtnClick);
 Refs.homeBtn.addEventListener('click', onHomeBtnClick);
+Refs.imgListIcon.addEventListener('click', onImgListIconClick);
+Refs.imgTypesList.addEventListener('click', onImageTypeItemClick);
 
 cardRequest(currentSearchType);
 // onUserInput ------------------------------------------------------------------------------
@@ -58,9 +61,10 @@ function onUserInput(event) {
 // onSubmitBtnClick ------------------------------------------------------------------------------
 function onSubmitBtnClick() {
   if (
-    requestUser === currentRequest &&
-    !(requestUser === '') &&
-    JSON.stringify(currentLanguage) === localStorage.getItem('currentLanguage')
+    (requestUser === currentRequest &&
+      JSON.stringify(currentLanguage) ===
+        localStorage.getItem('currentLanguage')) ||
+    Refs.favoritesBtn.classList.contains('activ')
   )
     return;
   if (requestUser === '') {
@@ -97,7 +101,7 @@ async function fetchCard(type) {
 function requestFetch(type) {
   if (type === 'img')
     return fetch(
-      `${BASE_URL}?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&${searchParams}`
+      `${BASE_URL}?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&image_type=${currentImgType}&${searchParams}`
     );
   if (type === 'video')
     return fetch(
@@ -178,12 +182,16 @@ async function onLoadMoreBtnClick() {
 // search filter-----------------------------------------------------------------------
 
 function onPicturesBtnClick(event) {
+  remoweActivItem(Refs.imgTypesList);
+  if (Refs.imgTypesList.querySelector('.activ')) {
+  }
   if (event.target.classList.contains('activ')) return;
   event.target.classList.add('activ');
   Refs.videoBtn.classList.remove('activ');
   if (Refs.favoritesBtn.classList.contains('activ')) return;
   currentSearchType = 'img';
   currentRequest = '';
+  currentImgType = '';
 }
 function onVideoBtnClick(event) {
   if (event.target.classList.contains('activ')) return;
@@ -192,6 +200,62 @@ function onVideoBtnClick(event) {
   if (Refs.favoritesBtn.classList.contains('activ')) return;
   currentSearchType = 'video';
   currentRequest = '';
+}
+let closeImgTypesListTimeout;
+function onImgListIconClick(event) {
+  showImgList();
+  document.body.addEventListener('click', closeImageList);
+  if (!Refs.imgListIcon.classList.contains('open')) {
+    document.body.removeEventListener('click', closeImageList);
+  } else {
+    closeImgTypesListTimeout = setTimeout(() => {
+      hideImgItem();
+      document.body.removeEventListener('click', closeImageList);
+    }, 5000);
+  }
+}
+function showImgList() {
+  Refs.imgTypesList.classList.toggle('open');
+  Refs.imgListIcon.classList.toggle('open');
+}
+function hideImgItem() {
+  Refs.imgTypesList.classList.remove('open');
+  Refs.imgListIcon.classList.remove('open');
+  clearTimeout(closeImgTypesListTimeout);
+}
+let selectImgTypesItem;
+function closeImageList(event) {
+  if (
+    !event.target.classList.contains('img-list-icon') &&
+    !event.target.classList.contains('img-icon') &&
+    !event.target.classList.contains('img-types-item')
+  ) {
+    hideImgItem();
+    document.body.removeEventListener('click', closeImageList);
+  }
+  if (event.target.classList.contains('img-types-item')) {
+    if (selectImgTypesItem) clearTimeout(selectImgTypesItem);
+    selectImgTypesItem = setTimeout(() => {
+      hideImgItem();
+    }, 1500);
+  }
+}
+function onImageTypeItemClick(event) {
+  if (event.target.classList.contains('activ')) return;
+
+  currentImgType = event.target.dataset.name;
+  remoweActivItem(event.currentTarget);
+
+  event.target.classList.add('activ');
+
+  Refs.picturesBtn.classList.add('activ');
+  Refs.videoBtn.classList.remove('activ');
+  currentSearchType = 'img';
+  currentRequest = '';
+}
+function remoweActivItem(event) {
+  if (event.querySelector('.activ'))
+    event.querySelector('.activ').classList.remove('activ');
 }
 //  hom btn click ---------------------------------------------------------------------------------------------
 

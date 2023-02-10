@@ -14,7 +14,6 @@ const lenguages = {
     class: 'lenguage-switch__marker--en',
   },
 };
-
 // localStorage.removeItem('currentLanguage');
 // выбор языка при загрузке страницы -------------------------
 let currentLanguage = {
@@ -112,3 +111,23 @@ function closesLanguagesList(e) {
   }
   createEventForClosingLanguagesList();
 }
+
+// const languageTaras = {
+//   favorites: { en: 'FAVORITES', pl: 'ULUBIONE', ru: 'ИЗБРАННОЕ' },
+//   goUpBtn: { en: 'Go up', pl: 'Wchodzić', ru: 'На верх' },
+//   home: { en: 'HOME', pl: 'DOM', ru: 'ДОМОЙ' },
+//   loadMoreBtn: { en: 'Load more', pl: 'Załaduj więcej', ru: 'Загрузить еще' },
+//   picturesBtn: { en: 'PICTURES', pl: 'KINO', ru: 'КАРТИНКИ' },
+//   placeholder: {
+//     en: 'keywords...',
+//     pl: 'słowa kluczowe...',
+//     ru: 'ключевые слова...',
+//   },
+//   searchBtn: { en: 'Search', pl: 'Szukaj', ru: 'Поиск' },
+//   videoBtn: { en: 'VIDEO', pl: 'WIDEO', ru: 'ВИДЕО' },
+//   photo: { en: 'photo', pl: 'zdjęcie', ru: 'фото' },
+//   illustration: { en: 'illustration', pl: 'ilustracja', ru: 'иллюстрации' },
+//   vector: { en: 'vector', pl: 'wektor', ru: 'вектор' },
+// };
+
+// console.log(JSON.stringify(languageTaras));

@@ -17,4 +17,6 @@ const Refs = {
   currentLanguage: document.querySelector('.language-switch__track'),
   picturesBtn: document.querySelector('.lang-picturesBtn'),
   videoBtn: document.querySelector('.lang-videoBtn'),
+  imgListIcon: document.querySelector('.img-list-icon'),
+  imgTypesList: document.querySelector('.img-types'),
 };

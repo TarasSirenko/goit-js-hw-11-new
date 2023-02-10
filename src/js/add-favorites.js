@@ -20,7 +20,7 @@ let currentLanguage = getCurrentLanguage();
 // проверка localStorage на информацию о избранных обектих
 
 let favoritesCardArr = [];
-localStorage.removeItem('favoritesCard');
+// localStorage.removeItem('favoritesCard');
 if (localStorage.getItem('favoritesCard')) {
   favoritesCardArr = JSON.parse(localStorage.getItem('favoritesCard'));
 }
@@ -35,7 +35,6 @@ function onFavoritesBtnClick(event) {
   event.preventDefault();
   currentLanguage = updateCurrentLanguage(currentLanguage);
   cardRequest(favoritesCardArr);
-  lightboxGallery.refresh();
   hideElem(Refs.loadMoreButton);
   changeActivePage(event);
 }
@@ -49,7 +48,7 @@ async function cardRequest(favoritesCards) {
 function fetchFavoritesCards(favoritesIdArr) {
   return favoritesIdArr.map(async ({ id, type }) => {
     let response;
-    if (type === 'photo') {
+    if (Object.values(imgType).includes(type)) {
       response = await fetch(
         `${BASE_URL}?id=${id}&lang=${currentLanguage.code}&${searchParams}`
       );
@@ -81,7 +80,9 @@ async function parseResponse(response) {
 function createMarcup(cards) {
   // console.log(cards);
 
-  const photoCards = imgCardMarcup(cards.filter(card => card.type === 'photo'));
+  const photoCards = imgCardMarcup(
+    cards.filter(card => Object.values(imgType).includes(card.type))
+  );
   const videoCards = videoCardMarcup(
     cards.filter(card => card.type === 'film')
   );
@@ -90,6 +91,7 @@ function createMarcup(cards) {
 }
 function renderCard(marcup) {
   Refs.gallery.innerHTML = marcup;
+  lightboxGallery.refresh();
 }
 function hideElem(elem) {
   elem.classList.add('visually-hidden');
@@ -115,7 +117,7 @@ function onAddFavoritesBtnClick(event) {
   }
   const newCard = createObjCard(event);
   const updatedArr = addCardInFavorites(favoritesCardArr, newCard);
-  console.log(updatedArr);
+  // console.log(updatedArr);
 
   updateLocalStorage(updatedArr);
 }
@@ -166,7 +168,9 @@ Refs.videoBtn.addEventListener('click', onVideoBtnClick);
 
 function onPicturesBtnClick() {
   if (!Refs.favoritesBtn.classList.contains('activ')) return;
-  const imgFavorites = favoritesCardArr.filter(card => card.type === 'photo');
+  const imgFavorites = favoritesCardArr.filter(card =>
+    Object.values(imgType).includes(card.type)
+  );
   cardRequest(imgFavorites);
   lightboxGallery.refresh();
 }
@@ -175,3 +179,10 @@ function onVideoBtnClick() {
   const videoFavorites = favoritesCardArr.filter(card => card.type === 'film');
   cardRequest(videoFavorites);
 }
+
+const imgType = {
+  ph: 'photo',
+  ill: 'illustration',
+  svg: 'vector/svg',
+  ai: 'vector/ai',
+};

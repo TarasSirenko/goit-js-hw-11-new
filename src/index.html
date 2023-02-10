@@ -81,8 +81,21 @@
     <main>
       
       <div class="search-filter">
-        <button class="sf-btn lang-picturesBtn activ">Pictures</button
-        ><button class="sf-btn lang-videoBtn">Video</button
+        <div class="img-type-container">
+          <div class="img-btn-wrapper">
+            <button class="sf-btn lang-picturesBtn activ">Pictures
+          </button>
+          <svg class="img-list-icon" aria-label="Иконка солнца">
+                <use class="img-icon" href="./img/svg/sprite.svg#icon-img-list"></use>
+          </svg>
+          </div>
+        <ul class="img-types">
+          <li class="img-types-item lang-photo" data-name="photo" >photo</li>
+          <li class="img-types-item lang-illustration"data-name="illustration" >illustration</li>
+          <li class="img-types-item lang-vector"data-name="vector" >vector</li>
+        </ul>
+        </div>
+        <button class="sf-btn lang-videoBtn">Video</button
         >
       </div>
       <div class="form-wrapper">
@@ -115,13 +128,19 @@
        
             <ul class="contacts-list">
               <a href="https://github.com/TarasSirenko" target="_blank" class="contacts-link">
-                <li class="contacts-item">гит</li>
+                <li class="contacts-item"> <svg class="theme-switch__icon custom-checkbox" role="img" aria-label="Иконка солнца">
+                <use href="./img/svg/sprite.svg#icon-github"></use>
+            </svg></li>
               </a>
               <a href="" target="_blank" class="contacts-link">
-                <li class="contacts-item">телега</li>
+                <li class="contacts-item"> <svg class="theme-switch__icon custom-checkbox" role="img" aria-label="Иконка солнца">
+                <use href="./img/svg/sprite.svg#icon-linkedin"></use>
+            </svg></li>
               </a>
               <a href="https://www.instagram.com/tarassirenko/?next=%2F" target="_blank" class="contacts-link">
-                <li class="contacts-item">инста</li>
+                <li class="contacts-item"> <svg class="theme-switch__icon custom-checkbox" role="img" aria-label="Иконка солнца">
+                <use href="./img/svg/sprite.svg#icon-instagram"></use>
+            </svg></li>
               </a>
             </ul>
    

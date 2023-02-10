@@ -202,7 +202,9 @@ const Refs = {
   languagesList: document.querySelector('.languages-list'),
   currentLanguage: document.querySelector('.language-switch__track'),
   picturesBtn: document.querySelector('.lang-picturesBtn'),
-  videoBtn: document.querySelector('.lang-videoBtn')
+  videoBtn: document.querySelector('.lang-videoBtn'),
+  imgListIcon: document.querySelector('.img-list-icon'),
+  imgTypesList: document.querySelector('.img-types')
 };
 exports.Refs = Refs;
 },{}],"js/change-theme.js":[function(require,module,exports) {
@@ -236,45 +238,60 @@ function onCheckboxChange() {
 }
 },{"./refs.js":"js/refs.js"}],"language.json":[function(require,module,exports) {
 module.exports = {
-  "home": {
-    "en": "HOME",
-    "pl": "Dom",
-    "ru": "Домой"
-  },
   "favorites": {
     "en": "FAVORITES",
-    "pl": "Ulubione",
-    "ru": "Избранное"
+    "pl": "ULUBIONE",
+    "ru": "ИЗБРАННОЕ"
   },
-  "picturesBtn": {
-    "en": "PICTURES",
-    "pl": "Obrazy",
-    "ru": "Картинки"
+  "goUpBtn": {
+    "en": "Go up",
+    "pl": "Wchodzić",
+    "ru": "На верх"
   },
-  "videoBtn": {
-    "en": "VIDEO",
-    "pl": "Wideo",
-    "ru": "Видео"
-  },
-  "searchBtn": {
-    "en": "Search",
-    "pl": "Szukaj",
-    "ru": "Поиск"
-  },
-  "placeholder": {
-    "en": "keywords...",
-    "pl": "słowa kluczowe...",
-    "ru": "ключевые слова..."
+  "home": {
+    "en": "HOME",
+    "pl": "DOM",
+    "ru": "ДОМОЙ"
   },
   "loadMoreBtn": {
     "en": "Load more",
     "pl": "Załaduj więcej",
     "ru": "Загрузить еще"
   },
-  "goUpBtn": {
-    "en": "Go up",
-    "pl": "Wchodzić",
-    "ru": "На верх"
+  "picturesBtn": {
+    "en": "PICTURES",
+    "pl": "KINO",
+    "ru": "КАРТИНКИ"
+  },
+  "placeholder": {
+    "en": "keywords...",
+    "pl": "słowa kluczowe...",
+    "ru": "ключевые слова..."
+  },
+  "searchBtn": {
+    "en": "Search",
+    "pl": "Szukaj",
+    "ru": "Поиск"
+  },
+  "videoBtn": {
+    "en": "VIDEO",
+    "pl": "WIDEO",
+    "ru": "ВИДЕО"
+  },
+  "photo": {
+    "en": "photo",
+    "pl": "zdjęcie",
+    "ru": "фото"
+  },
+  "illustration": {
+    "en": "illustration",
+    "pl": "ilustracja",
+    "ru": "иллюстрации"
+  },
+  "vector": {
+    "en": "vector",
+    "pl": "wektor",
+    "ru": "вектор"
   }
 };
 },{}],"js/change-language.js":[function(require,module,exports) {
@@ -297,7 +314,6 @@ const lenguages = {
     class: 'lenguage-switch__marker--en'
   }
 };
-
 // localStorage.removeItem('currentLanguage');
 // выбор языка при загрузке страницы -------------------------
 let currentLanguage = {
@@ -374,6 +390,26 @@ function closesLanguagesList(e) {
   }
   createEventForClosingLanguagesList();
 }
+
+// const languageTaras = {
+//   favorites: { en: 'FAVORITES', pl: 'ULUBIONE', ru: 'ИЗБРАННОЕ' },
+//   goUpBtn: { en: 'Go up', pl: 'Wchodzić', ru: 'На верх' },
+//   home: { en: 'HOME', pl: 'DOM', ru: 'ДОМОЙ' },
+//   loadMoreBtn: { en: 'Load more', pl: 'Załaduj więcej', ru: 'Загрузить еще' },
+//   picturesBtn: { en: 'PICTURES', pl: 'KINO', ru: 'КАРТИНКИ' },
+//   placeholder: {
+//     en: 'keywords...',
+//     pl: 'słowa kluczowe...',
+//     ru: 'ключевые слова...',
+//   },
+//   searchBtn: { en: 'Search', pl: 'Szukaj', ru: 'Поиск' },
+//   videoBtn: { en: 'VIDEO', pl: 'WIDEO', ru: 'ВИДЕО' },
+//   photo: { en: 'photo', pl: 'zdjęcie', ru: 'фото' },
+//   illustration: { en: 'illustration', pl: 'ilustracja', ru: 'иллюстрации' },
+//   vector: { en: 'vector', pl: 'wektor', ru: 'вектор' },
+// };
+
+// console.log(JSON.stringify(languageTaras));
 },{"../language.json":"language.json","./refs.js":"js/refs.js"}],"js/go-up-btn.js":[function(require,module,exports) {
 "use strict";
 
@@ -1972,7 +2008,7 @@ const templateFunction = _handlebars.default.template({
         }
         return undefined;
       };
-    return "\r\n<div class=\"photo-card\" data-id=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "id") : depth0, depth0)) + " data-type=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "type") : depth0, depth0)) + ">\r\n    <a class=\"card-link\" href=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "largeImageURL") : depth0, depth0)) + "\">\r\n        <img src=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "webformatURL") : depth0, depth0)) + "\" alt=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "\" loading=\"lazy\" class=\"card-img\" />\r\n    </a>\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n        <label aria-hidden=\"true\" class=\"label-add-favorites \">\r\n            <input class=\"add-favorites\" type=\"checkbox\" aria-label=\"добавление в избранное\" " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "check") : depth0, depth0)) + " />\r\n            <svg class=\"theme-switch__icon custom-checkbox\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                <use href=\"/sprite.dc9ae70e.svg#icon-star\"></use>\r\n            </svg>\r\n        </label>\r\n        <div class=\"info-wrapper\">\r\n            <p class=\"info-item\">\r\n                <b class=\"likes info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.dc9ae70e.svg#icon-likes\"></use>\r\n                    </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"views info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.dc9ae70e.svg#icon-views\"></use>\r\n                    </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"comments info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.dc9ae70e.svg#icon-comments\"></use>\r\n                    </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"downloads info-item--element\">\r\n                    <svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.dc9ae70e.svg#icon-download\"></use>\r\n                    </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n            </p>\r\n        </div>\r\n\r\n    </div>\r\n</div>\r\n\r\n";
+    return "\r\n<div class=\"photo-card\" data-id=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "id") : depth0, depth0)) + " data-type=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "type") : depth0, depth0)) + ">\r\n    <a class=\"card-link\" href=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "largeImageURL") : depth0, depth0)) + "\">\r\n        <img src=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "webformatURL") : depth0, depth0)) + "\" alt=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "\" loading=\"lazy\" class=\"card-img\" />\r\n    </a>\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n        <label aria-hidden=\"true\" class=\"label-add-favorites \">\r\n            <input class=\"add-favorites\" type=\"checkbox\" aria-label=\"добавление в избранное\" " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "check") : depth0, depth0)) + " />\r\n            <svg class=\"theme-switch__icon custom-checkbox\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                <use href=\"/sprite.svg#icon-star\"></use>\r\n            </svg>\r\n        </label>\r\n        <div class=\"info-wrapper\">\r\n            <p class=\"info-item\">\r\n                <b class=\"likes info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.svg#icon-likes\"></use>\r\n                    </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"views info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.svg#icon-views\"></use>\r\n                    </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"comments info-item--element\"><svg class=\"theme-switch__icon\" role=\"img\"\r\n                        aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.svg#icon-comments\"></use>\r\n                    </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n            </p>\r\n            <p class=\"info-item\">\r\n                <b class=\"downloads info-item--element\">\r\n                    <svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                        <use href=\"/sprite.svg#icon-download\"></use>\r\n                    </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n            </p>\r\n        </div>\r\n\r\n    </div>\r\n</div>\r\n\r\n";
   },
   "compiler": [8, ">= 4.3.0"],
   "main": function (container, depth0, helpers, partials, data) {
@@ -2025,7 +2061,7 @@ const templateFunction = _handlebars.default.template({
         }
         return undefined;
       };
-    return "<div class=\"photo-card video\" data-id=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "id") : depth0, depth0)) + " data-type=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "type") : depth0, depth0)) + ">\r\n    <video id=\"my-player\" class=\"video-js vjs-theme-city\" controls preload=\"auto\" poster=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "picture_id") : depth0, depth0)) + "\" >\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/mp4\">\r\n        </source>\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/webm\">\r\n        </source>\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/ogg\">\r\n        </source>\r\n        <p class=\"vjs-no-js\">\r\n            To view this video please enable JavaScript, and consider upgrading to a\r\n            web browser that\r\n            <a href=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" target=\"_blank\">\r\n                supports HTML5 video\r\n            </a>\r\n        </p>\r\n    </video>\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n        <label aria-hidden=\"true\" class=\"label-add-favorites \">\r\n            <input class=\"add-favorites\" type=\"checkbox\" aria-label=\"добавление в избранное\" " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "check") : depth0, depth0)) + " />\r\n        </label>\r\n\r\n        <p class=\"info-item\">\r\n            <b class=\"likes\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"/sprite.dc9ae70e.svg#icon-likes\"></use>\r\n                </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"views\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"/sprite.dc9ae70e.svg#icon-views\"></use>\r\n                </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"comments\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"/sprite.dc9ae70e.svg#icon-comments\"></use>\r\n                </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"downloads\">\r\n                <svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"/sprite.dc9ae70e.svg#icon-download\"></use>\r\n                </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n    </div>\r\n</div>\r\n\r\n";
+    return "<div class=\"photo-card video\" data-id=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "id") : depth0, depth0)) + " data-type=" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "type") : depth0, depth0)) + ">\r\n    <video id=\"my-player\" class=\"video-js vjs-theme-city\" controls preload=\"auto\" poster=\"" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "picture_id") : depth0, depth0)) + "\" >\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/mp4\">\r\n        </source>\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/webm\">\r\n        </source>\r\n        <source src=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "tiny") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" type=\"video/ogg\">\r\n        </source>\r\n        <p class=\"vjs-no-js\">\r\n            To view this video please enable JavaScript, and consider upgrading to a\r\n            web browser that\r\n            <a href=\"" + alias2(alias1((stack1 = (stack1 = depth0 != null ? lookupProperty(depth0, "videos") : depth0) != null ? lookupProperty(stack1, "medium") : stack1) != null ? lookupProperty(stack1, "url") : stack1, depth0)) + "\" target=\"_blank\">\r\n                supports HTML5 video\r\n            </a>\r\n        </p>\r\n    </video>\r\n    <div class=\"info\">\r\n        <p class=\"info-item\">\r\n            <b>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "tags") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n        <label aria-hidden=\"true\" class=\"label-add-favorites \">\r\n            <input class=\"add-favorites\" type=\"checkbox\" aria-label=\"добавление в избранное\" " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "check") : depth0, depth0)) + " />\r\n            <svg class=\"theme-switch__icon custom-checkbox\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                <use href=\"/sprite.svg#icon-star\"></use>\r\n            </svg>\r\n        </label>\r\n\r\n        <p class=\"info-item\">\r\n            <b class=\"likes\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"sprite.svg#icon-likes\"></use>\r\n                </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "likes") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"views\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"sprite.svg#icon-views\"></use>\r\n                </svg>" + alias2(alias1(depth0 != null ? lookupProperty(depth0, "views") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"comments\"><svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"sprite.svg#icon-comments\"></use>\r\n                </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "comments") : depth0, depth0)) + "</b>\r\n        </p>\r\n        <p class=\"info-item\">\r\n            <b class=\"downloads\">\r\n                <svg class=\"theme-switch__icon\" role=\"img\" aria-label=\"Иконка солнца\">\r\n                    <use href=\"sprite.svg#icon-download\"></use>\r\n                </svg> " + alias2(alias1(depth0 != null ? lookupProperty(depth0, "downloads") : depth0, depth0)) + "</b>\r\n        </p>\r\n\r\n    </div>\r\n</div>\r\n\r\n";
   },
   "compiler": [8, ">= 4.3.0"],
   "main": function (container, depth0, helpers, partials, data) {
@@ -2048,7 +2084,7 @@ const templateFunction = _handlebars.default.template({
           "column": 0
         },
         "end": {
-          "line": 52,
+          "line": 55,
           "column": 9
         }
       }
@@ -3695,8 +3731,8 @@ let currentLanguage = (0, _forLanguage.getCurrentLanguage)();
 // проверка localStorage на информацию о избранных обектих
 
 let favoritesCardArr = [];
+// localStorage.removeItem('favoritesCard');
 exports.favoritesCardArr = favoritesCardArr;
-localStorage.removeItem('favoritesCard');
 if (localStorage.getItem('favoritesCard')) {
   exports.favoritesCardArr = favoritesCardArr = JSON.parse(localStorage.getItem('favoritesCard'));
 }
@@ -3710,7 +3746,6 @@ function onFavoritesBtnClick(event) {
   event.preventDefault();
   currentLanguage = (0, _forLanguage.updateCurrentLanguage)(currentLanguage);
   cardRequest(favoritesCardArr);
-  _lightBox.lightboxGallery.refresh();
   hideElem(_refs.Refs.loadMoreButton);
   changeActivePage(event);
 }
@@ -3727,7 +3762,7 @@ function fetchFavoritesCards(favoritesIdArr) {
       type
     } = _ref;
     let response;
-    if (type === 'photo') {
+    if (Object.values(imgType).includes(type)) {
       response = await fetch(`${_fetchParams.BASE_URL}?id=${id}&lang=${currentLanguage.code}&${_fetchParams.searchParams}`);
     }
     if (type === 'film') {
@@ -3750,13 +3785,14 @@ async function parseResponse(response) {
 function createMarcup(cards) {
   // console.log(cards);
 
-  const photoCards = (0, _imgCardMarcup.default)(cards.filter(card => card.type === 'photo'));
+  const photoCards = (0, _imgCardMarcup.default)(cards.filter(card => Object.values(imgType).includes(card.type)));
   const videoCards = (0, _videoCardMarcup.default)(cards.filter(card => card.type === 'film'));
   const marcup = photoCards + videoCards;
   return marcup;
 }
 function renderCard(marcup) {
   _refs.Refs.gallery.innerHTML = marcup;
+  _lightBox.lightboxGallery.refresh();
 }
 function hideElem(elem) {
   elem.classList.add('visually-hidden');
@@ -3781,7 +3817,8 @@ function onAddFavoritesBtnClick(event) {
   }
   const newCard = createObjCard(event);
   const updatedArr = addCardInFavorites(favoritesCardArr, newCard);
-  console.log(updatedArr);
+  // console.log(updatedArr);
+
   updateLocalStorage(updatedArr);
 }
 function createObjCard(event) {
@@ -3826,7 +3863,7 @@ _refs.Refs.picturesBtn.addEventListener('click', onPicturesBtnClick);
 _refs.Refs.videoBtn.addEventListener('click', onVideoBtnClick);
 function onPicturesBtnClick() {
   if (!_refs.Refs.favoritesBtn.classList.contains('activ')) return;
-  const imgFavorites = favoritesCardArr.filter(card => card.type === 'photo');
+  const imgFavorites = favoritesCardArr.filter(card => Object.values(imgType).includes(card.type));
   cardRequest(imgFavorites);
   _lightBox.lightboxGallery.refresh();
 }
@@ -3835,6 +3872,12 @@ function onVideoBtnClick() {
   const videoFavorites = favoritesCardArr.filter(card => card.type === 'film');
   cardRequest(videoFavorites);
 }
+const imgType = {
+  ph: 'photo',
+  ill: 'illustration',
+  svg: 'vector/svg',
+  ai: 'vector/ai'
+};
 },{"../hbs/imgCardMarcup.hbs":"hbs/imgCardMarcup.hbs","../hbs/videoCardMarcup.hbs":"hbs/videoCardMarcup.hbs","./refs.js":"js/refs.js","./utils/light-box.js":"js/utils/light-box.js","./fetch-params.js":"js/fetch-params.js","./utils/for-language.js":"js/utils/for-language.js"}],"../node_modules/notiflix/dist/notiflix-aio-3.2.6.min.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
@@ -4251,6 +4294,7 @@ let currentPage = 1;
 let scroll = true;
 let currentLanguage = (0, _forLanguage.getCurrentLanguage)();
 let currentSearchType = 'img';
+let currentImgType = '';
 // ----------------------------
 
 _refs.Refs.requestForm.addEventListener('submit', event => event.preventDefault());
@@ -4260,6 +4304,8 @@ _refs.Refs.loadMoreButton.addEventListener('click', onLoadMoreBtnClick);
 _refs.Refs.picturesBtn.addEventListener('click', onPicturesBtnClick);
 _refs.Refs.videoBtn.addEventListener('click', onVideoBtnClick);
 _refs.Refs.homeBtn.addEventListener('click', onHomeBtnClick);
+_refs.Refs.imgListIcon.addEventListener('click', onImgListIconClick);
+_refs.Refs.imgTypesList.addEventListener('click', onImageTypeItemClick);
 cardRequest(currentSearchType);
 // onUserInput ------------------------------------------------------------------------------
 function onUserInput(event) {
@@ -4267,7 +4313,7 @@ function onUserInput(event) {
 }
 // onSubmitBtnClick ------------------------------------------------------------------------------
 function onSubmitBtnClick() {
-  if (requestUser === currentRequest && !(requestUser === '') && JSON.stringify(currentLanguage) === localStorage.getItem('currentLanguage')) return;
+  if (requestUser === currentRequest && JSON.stringify(currentLanguage) === localStorage.getItem('currentLanguage') || _refs.Refs.favoritesBtn.classList.contains('activ')) return;
   if (requestUser === '') {
     clearPage();
     _notiflix.default.Notify.warning('Enter a search term please.');
@@ -4300,7 +4346,7 @@ async function fetchCard(type) {
   return objImgCards;
 }
 function requestFetch(type) {
-  if (type === 'img') return fetch(`${_fetchParams.BASE_URL}?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&${_fetchParams.searchParams}`);
+  if (type === 'img') return fetch(`${_fetchParams.BASE_URL}?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&image_type=${currentImgType}&${_fetchParams.searchParams}`);
   if (type === 'video') return fetch(`${_fetchParams.BASE_URL}videos?q=${requestUser}&lang=${currentLanguage.code}&page=${currentPage}&${_fetchParams.searchParams}`);
 }
 function responseCheck(response) {
@@ -4371,12 +4417,15 @@ async function onLoadMoreBtnClick() {
 // search filter-----------------------------------------------------------------------
 
 function onPicturesBtnClick(event) {
+  remoweActivItem(_refs.Refs.imgTypesList);
+  if (_refs.Refs.imgTypesList.querySelector('.activ')) {}
   if (event.target.classList.contains('activ')) return;
   event.target.classList.add('activ');
   _refs.Refs.videoBtn.classList.remove('activ');
   if (_refs.Refs.favoritesBtn.classList.contains('activ')) return;
   currentSearchType = 'img';
   currentRequest = '';
+  currentImgType = '';
 }
 function onVideoBtnClick(event) {
   if (event.target.classList.contains('activ')) return;
@@ -4385,6 +4434,54 @@ function onVideoBtnClick(event) {
   if (_refs.Refs.favoritesBtn.classList.contains('activ')) return;
   currentSearchType = 'video';
   currentRequest = '';
+}
+let closeImgTypesListTimeout;
+function onImgListIconClick(event) {
+  showImgList();
+  document.body.addEventListener('click', closeImageList);
+  if (!_refs.Refs.imgListIcon.classList.contains('open')) {
+    document.body.removeEventListener('click', closeImageList);
+  } else {
+    closeImgTypesListTimeout = setTimeout(() => {
+      hideImgItem();
+      document.body.removeEventListener('click', closeImageList);
+    }, 5000);
+  }
+}
+function showImgList() {
+  _refs.Refs.imgTypesList.classList.toggle('open');
+  _refs.Refs.imgListIcon.classList.toggle('open');
+}
+function hideImgItem() {
+  _refs.Refs.imgTypesList.classList.remove('open');
+  _refs.Refs.imgListIcon.classList.remove('open');
+  clearTimeout(closeImgTypesListTimeout);
+}
+let selectImgTypesItem;
+function closeImageList(event) {
+  if (!event.target.classList.contains('img-list-icon') && !event.target.classList.contains('img-icon') && !event.target.classList.contains('img-types-item')) {
+    hideImgItem();
+    document.body.removeEventListener('click', closeImageList);
+  }
+  if (event.target.classList.contains('img-types-item')) {
+    if (selectImgTypesItem) clearTimeout(selectImgTypesItem);
+    selectImgTypesItem = setTimeout(() => {
+      hideImgItem();
+    }, 1500);
+  }
+}
+function onImageTypeItemClick(event) {
+  if (event.target.classList.contains('activ')) return;
+  currentImgType = event.target.dataset.name;
+  remoweActivItem(event.currentTarget);
+  event.target.classList.add('activ');
+  _refs.Refs.picturesBtn.classList.add('activ');
+  _refs.Refs.videoBtn.classList.remove('activ');
+  currentSearchType = 'img';
+  currentRequest = '';
+}
+function remoweActivItem(event) {
+  if (event.querySelector('.activ')) event.querySelector('.activ').classList.remove('activ');
 }
 //  hom btn click ---------------------------------------------------------------------------------------------
 
@@ -4434,7 +4531,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5899" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4095" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
