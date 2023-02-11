@@ -18,19 +18,17 @@
     "url": "https://github.com/goitacademy/parcel-project-template/issues"
   },
   "dependencies": {
-    "@videojs/themes": "^1.0.1",
     "lodash.debounce": "^4.0.8",
-    "lodash.throttle": "^4.1.1",
-    "modern-normalize": "^1.1.0"
+    "modern-normalize": "^1.1.0",
+    "notiflix": "^3.2.5"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.6.0",
-    "axios": "^1.2.4",
-    "notiflix": "^3.2.6",
-    "parcel-bundler": "^1.11.0",
     "parcel-plugin-handlebars-precompile": "^1.0.2",
-    "simplelightbox": "^2.12.1",
+     "@parcel/transformer-sass": "^2.6.0",
+     "parcel-bundler": "^1.11.0",
+     "simplelightbox": "^2.12.1",
     "video.js": "^8.0.3"
+   
   },
   "browserslist": "> 0.5%, last 2 versions, not dead"
 }
