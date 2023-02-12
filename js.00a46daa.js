@@ -3731,8 +3731,8 @@ let currentLanguage = (0, _forLanguage.getCurrentLanguage)();
 // проверка localStorage на информацию о избранных обектих
 
 let favoritesCardArr = [];
-// localStorage.removeItem('favoritesCard');
 exports.favoritesCardArr = favoritesCardArr;
+localStorage.removeItem('favoritesCard');
 if (localStorage.getItem('favoritesCard')) {
   exports.favoritesCardArr = favoritesCardArr = JSON.parse(localStorage.getItem('favoritesCard'));
 }
@@ -3765,7 +3765,7 @@ function fetchFavoritesCards(favoritesIdArr) {
     if (Object.values(imgType).includes(type)) {
       response = await fetch(`${_fetchParams.BASE_URL}?id=${id}&lang=${currentLanguage.code}&${_fetchParams.searchParams}`);
     }
-    if (type === 'film') {
+    if (type === 'film' || type === 'animation') {
       response = await fetch(`${_fetchParams.BASE_URL}videos?id=${id}&lang=${currentLanguage.code}&${_fetchParams.searchParams}`);
     }
     return response.json();
@@ -3774,7 +3774,7 @@ function fetchFavoritesCards(favoritesIdArr) {
 async function parseResponse(response) {
   const fetchInfo = await Promise.all(response);
   const cards = await fetchInfo.map(e => {
-    if (e.hits[0].type === 'film') {
+    if (e.hits[0].type === 'film' || e.hits[0].type === 'animation') {
       e.hits[0].picture_id = `${_fetchParams.BASE_URL_VIDEO_PREVIEW}${e.hits[0].picture_id}_${_fetchParams.previewSize}.jpg`;
     }
     e.hits[0].check = 'checked';
@@ -3786,7 +3786,7 @@ function createMarcup(cards) {
   // console.log(cards);
 
   const photoCards = (0, _imgCardMarcup.default)(cards.filter(card => Object.values(imgType).includes(card.type)));
-  const videoCards = (0, _videoCardMarcup.default)(cards.filter(card => card.type === 'film'));
+  const videoCards = (0, _videoCardMarcup.default)(cards.filter(card => card.type === 'film' || card.type === 'animation'));
   const marcup = photoCards + videoCards;
   return marcup;
 }
@@ -3869,7 +3869,7 @@ function onPicturesBtnClick() {
 }
 function onVideoBtnClick() {
   if (!_refs.Refs.favoritesBtn.classList.contains('activ')) return;
-  const videoFavorites = favoritesCardArr.filter(card => card.type === 'film');
+  const videoFavorites = favoritesCardArr.filter(card => card.type === 'film' || card.type === 'animation');
   cardRequest(videoFavorites);
 }
 const imgType = {
@@ -3878,6 +3878,8 @@ const imgType = {
   svg: 'vector/svg',
   ai: 'vector/ai'
 };
+
+// animation;
 },{"../hbs/imgCardMarcup.hbs":"hbs/imgCardMarcup.hbs","../hbs/videoCardMarcup.hbs":"hbs/videoCardMarcup.hbs","./refs.js":"js/refs.js","./utils/light-box.js":"js/utils/light-box.js","./fetch-params.js":"js/fetch-params.js","./utils/for-language.js":"js/utils/for-language.js"}],"../node_modules/notiflix/dist/notiflix-aio-3.2.6.min.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
@@ -4531,7 +4533,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "12570" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5399" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
