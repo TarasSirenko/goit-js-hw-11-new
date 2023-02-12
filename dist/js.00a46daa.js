@@ -3733,8 +3733,8 @@ let currentLanguage = (0, _forLanguage.getCurrentLanguage)();
 // проверка localStorage на информацию о избранных обектих
 
 let favoritesCardArr = [];
+// localStorage.removeItem('favoritesCard');
 exports.favoritesCardArr = favoritesCardArr;
-localStorage.removeItem('favoritesCard');
 if (localStorage.getItem('favoritesCard')) {
   exports.favoritesCardArr = favoritesCardArr = JSON.parse(localStorage.getItem('favoritesCard'));
 }
@@ -4535,7 +4535,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "9097" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "11902" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
