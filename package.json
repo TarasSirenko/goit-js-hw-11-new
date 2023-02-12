@@ -2,14 +2,14 @@
   "name": "parcel-project-template",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://tarassirenko.github.io/photo-search/",
+  "homepage": "https://tarassirenko.github.io/goit-js-hw-11-new/",
   "scripts": {
     "start": "parcel src/index.html --open",
-    "build": "parcel build src/*.html --public-url /photo-search/"
+    "build": "parcel build src/*.html --public-url /goit-js-hw-11-new/"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/TarasSirenko/photo-search.git"
+    "url": "https://github.com/TarasSirenko/goit-js-hw-11-new.git"
   },
   "keywords": [],
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
