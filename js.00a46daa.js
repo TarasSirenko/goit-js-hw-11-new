@@ -223,6 +223,7 @@ try {
     _refs.Refs.footer.classList.toggle(Theme.DARK);
     _refs.Refs.favoritesBtn.classList.toggle(Theme.DARK);
     _refs.Refs.homeBtn.classList.toggle(Theme.DARK);
+    _refs.Refs.imgTypesList.classList.toggle(Theme.DARK);
     _refs.Refs.checkbox.checked = true;
   }
 } catch {}
@@ -233,6 +234,7 @@ function onCheckboxChange() {
   _refs.Refs.footer.classList.toggle(Theme.DARK);
   _refs.Refs.favoritesBtn.classList.toggle(Theme.DARK);
   _refs.Refs.homeBtn.classList.toggle(Theme.DARK);
+  _refs.Refs.imgTypesList.classList.toggle(Theme.DARK);
   _refs.Refs.checkbox.checked ? currentTheme = Theme.DARK : currentTheme = Theme.LIGHT;
   localStorage.setItem('currentTheme', currentTheme);
 }
@@ -4533,7 +4535,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5399" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "9097" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
